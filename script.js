@@ -80,7 +80,9 @@ rl.question('Enter the path to the directory with PDF files:\n', (directory) => 
         const processNextFile = () => {
             if (fileIndex >= files.length) {
                 rl.close();
-                console.log('Compression complete. All files have been compressed successfully.');
+                console.log('%cCompression complete. All files have been compressed successfully.', 'color: green');
+                setTimeout(() => {}, 5000);
+
                 return;
             }
 

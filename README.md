@@ -21,9 +21,9 @@ If you want to use the original Windows batch script, follow these steps:
 3. Run the script by executing the following command: `script.bat`
 
 4. Follow the on-screen instructions to compress your PDF files.
-    
+
 ##
-   
+
 ### Using the Batch Script for a very large number of pdf files (`script_v2.bat`)
 
 This original Windows batch script is designed for compressing very large number of pdf files and has several improvements:
@@ -35,7 +35,7 @@ This original Windows batch script is designed for compressing very large number
 If you want to use this Windows command script, follow the same steps as for a regular script.bat
 
 ##
-   
+
 ### Using the JavaScript (`script.js`)
 
 If you prefer to use JavaScript, follow these steps:
@@ -49,7 +49,7 @@ If you prefer to use JavaScript, follow these steps:
 4. Follow the on-screen instructions to compress your PDF files.
 
 ##
-   
+
 ### Using the Windows Executable (`script-win.exe`)
 
 If you prefer a standalone executable for Windows, follow these steps:
@@ -61,27 +61,26 @@ If you prefer a standalone executable for Windows, follow these steps:
 3. Run the executable by executing the following command: `script-win.exe`
 
 4. Follow the on-screen instructions to compress your PDF files.
-   
-   
-***Note: Make sure to have Ghostscript installed on your system and its executable added to the system's PATH environment variable before running any of the scripts.***
-   
 
-   
+**_Note: Make sure to have Ghostscript installed on your system and its executable added to the system's PATH environment variable before running any of the scripts._**
+
 ## Script Functionality
 
-1. The script displays the current version of Ghostscript.
+1. Check if [Ghostscript utility] (https://www.ghostscript.com/) is installed and terminate the script execution if it is not (Windows batch script only).
 
-2. The user is prompted to enter the path to the directory containing the PDF files.
+2. The script displays the current version of Ghostscript.
 
-3. The user is asked to select a compression level based on their desired quality for the compressed files.
+3. The user is prompted to enter the path to the directory containing the PDF files.
 
-4. The script searches for all PDF files in the specified directory.
+4. The user is asked to select a compression level based on their desired quality for the compressed files.
 
-5. Each file is compressed using Ghostscript with the selected compression level.
+5. The script searches for all PDF files in the specified directory.
 
-6. After compression, the user is prompted to confirm whether to delete the original file.
+6. Each file is compressed using Ghostscript with the selected compression level.
 
-7. Once all files are processed, a message is displayed to indicate that the compression is complete.
+7. After compression, the user is prompted to confirm whether to delete the original file.
+
+8. Once all files are processed, a message is displayed to indicate that the compression is complete.
 
 ## Notes
 

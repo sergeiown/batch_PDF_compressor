@@ -66,7 +66,7 @@ If you prefer a standalone executable for Windows, follow these steps:
 
 ## Script Functionality
 
-1. Check if [Ghostscript utility] (https://www.ghostscript.com/) is installed and terminate the script execution if it is not (Windows batch script only).
+1. Check if [Ghostscript utility](https://www.ghostscript.com/) is installed and terminate the script execution if it is not (Windows batch script only).
 
 2. The script displays the current version of Ghostscript.
 

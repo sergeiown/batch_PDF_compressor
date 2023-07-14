@@ -1,12 +1,34 @@
 @echo off
 color 08
+
+REM Enable delayed variable expansion
+REM This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
+
+REM Check if Ghostscript is installed
+where gswin64c.exe >nul 2>&1
+if errorlevel 1 (
+    cls
+    color 0C
+
+    echo Ghostscript is not installed.
+    echo Please download and install Ghostscript from the following link:
+    echo https://ghostscript.com/releases/gsdnld.html
+
+    pause
+    color
+
+    exit /b
+)
 
 REM Display current Ghostscript version
 echo Current Ghostscript version:
 gswin64c.exe --version
-
+echo All right, let's begin.
 echo.
+
+REM Pause for 3 seconds and prompt for path input
+timeout /t 3 >nul
 
 echo Enter the path to the directory with PDF files:
 echo.

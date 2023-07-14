@@ -32,6 +32,8 @@ This original Windows batch script is designed for compressing very large number
 
 -   added the ability to compress all pdf files in all subdirectories relative to the path specified by the user.
 
+If you want to use this Windows command script, follow the same steps as for a regular script.bat
+
 ##
    
 ### Using the JavaScript (`script.js`)

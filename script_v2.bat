@@ -88,11 +88,18 @@ REM Set the color to green for the specified line
 cls
 color 0A
 
+timeout /t 1 >nul
+
 echo.
 echo Compression complete. All files have been compressed successfully.
+
+timeout /t 1 >nul
+
 echo.
 echo Total files compressed: !filecount!
 echo.
+
+timeout /t 1 >nul
 
 pause
 color

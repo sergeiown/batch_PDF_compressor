@@ -18,7 +18,7 @@ if errorlevel 1 (
 REM Display current Ghostscript version
 echo Current Ghostscript version:
 gswin64c.exe --version
-
+echo All right, let's begin.
 echo.
 
 echo Enter the path to the directory with PDF files:

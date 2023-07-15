@@ -1,13 +1,13 @@
 @echo off
 
-REM Enable delayed variable expansion
-REM This allows obtaining updated variable values inside loops and code blocks
+REM Enable delayed variable expansion to allow obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
 
 REM Check if Ghostscript is installed
 where gswin64c.exe >nul 2>&1
 if errorlevel 1 (
     cls
+    REM Set the color to red
     color 0C
 
     echo ----------------------------------------------------------------
@@ -27,7 +27,7 @@ if errorlevel 1 (
     exit /b
 )
 
-REM Display current Ghostscript version
+REM Set the color to green and display current Ghostscript version
 color 0A
 
 echo -----------------------------
@@ -38,10 +38,9 @@ echo It's okay, let's get started.
 echo.
 echo -----------------------------
 
-
-REM Pause for 2 seconds and prompt for path input
 timeout /t 2 >nul
 
+REM Set the color to grey
 color 08
 
 echo.
@@ -76,7 +75,7 @@ for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "initialSize+=%%~zA"
 )
 
-REM Reset the progress counter
+REM Reset the progress counters
 set /A "progress=0"
 set /A "progress_compression=0"
 set /A "progress_already_compressed=0"
@@ -141,20 +140,20 @@ for /R "%directory%" %%F in (*_compressed.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
-REM get the size in megabytes
+REM Get the size in megabytes
 set /A "initialSizeMB=initialSize/10485"
 set /A "compressedSizeMB=compressedSize/10485"
 
-REM round the value to the second decimal place
+REM Round the value to the second decimal place
 set /A "initialSizeMB=((initialSizeMB*10) + 5) / 1000"
 set /A "compressedSizeMB=((compressedSizeMB*10) + 5) / 1000"
 
-REM file size after compression and percentage compression
+REM Get file size after compression and percentage compression
 set /A "sizeDifference=initialSizeMB-compressedSizeMB"
 set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
 
-REM Set the color to green for the specified line
 cls
+REM Set the color to green
 color 0A
 
 echo ==================================================================

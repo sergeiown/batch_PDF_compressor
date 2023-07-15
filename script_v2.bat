@@ -1,5 +1,4 @@
 @echo off
-color 08
 
 REM Enable delayed variable expansion
 REM This allows obtaining updated variable values inside loops and code blocks
@@ -22,13 +21,17 @@ if errorlevel 1 (
 )
 
 REM Display current Ghostscript version
+color 0A
+
 echo Current Ghostscript version:
 gswin64c.exe --version
-echo All right, let's begin.
+echo It's okay, let's get started.
 echo.
 
 REM Pause for 3 seconds and prompt for path input
-timeout /t 3 >nul
+timeout /t 2 >nul
+
+color 08
 
 echo Enter the path to the directory with PDF files:
 echo.
@@ -61,25 +64,45 @@ for /R "%directory%" %%F in (*.pdf) do (
 
 REM Reset the progress counter
 set /A "progress=0"
+set /A "progress_compression=0"
+set /A "progress_already_compressed=0"
 
 REM Recursive loop to process PDF files in all subdirectories
 for /R "%directory%" %%F in (*.pdf) do (
   set "input=%%F"
   set "output=%%~dpF%%~nF_compressed.pdf"
   
-  echo ---
-  echo Compressing file: %%F
+  REM Check if the file has already been compressed by checking the filename suffix
+  echo %%~nF | find /i "_compressed" >nul
 
-  REM Increment the progress counter
-  set /A "progress+=1"
+  if not errorlevel 1 (
+    REM File has already been compressed, skip compression and deletion
+    echo ---
+    echo Skipping file: %%F
+    echo Compression not required. File has already been compressed.
+
+    REM Increment the progress counter
+    set /A "progress+=1"
+    set /A "progress_already_compressed+=1"
+
+    echo Progress: !progress! / !filecount!
+  ) else (
+    REM File needs to be compressed
+    echo ---
+    echo Compressing file: %%F
+
+    REM Increment the progress counter
+    set /A "progress+=1"
+    set /A "progress_compression+=1"
   
-  echo Progress: !progress! / !filecount!
+    echo Progress: !progress! / !filecount!
   
-  REM Modified code to use Ghostscript with the selected compression level
-  gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
+    REM Modified code to use Ghostscript with the selected compression level
+    gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
   
-  echo Deleting original file.
-  del "!input!"
+    echo Deleting original file.
+    del "!input!"
+  )
 )
 
 echo.
@@ -88,18 +111,31 @@ REM Set the color to green for the specified line
 cls
 color 0A
 
-timeout /t 1 >nul
-
-echo.
+echo ------------------------------------------------------------------
 echo Compression complete. All files have been compressed successfully.
+echo ------------------------------------------------------------------
 
 timeout /t 1 >nul
 
 echo.
-echo Total files compressed: !filecount!
+echo Total files compressed: !progress!
 echo.
 
 timeout /t 1 >nul
 
+echo.
+echo Files are compressed during the session: !progress_compression!
+echo.
+
+timeout /t 1 >nul
+
+echo.
+echo Files that don't require compression: !progress_already_compressed!
+echo.
+echo ------------------------------------------------------------------
+
+timeout /t 1 >nul
+
+echo.
 pause
 color

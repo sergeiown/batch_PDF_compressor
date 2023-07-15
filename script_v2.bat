@@ -114,16 +114,21 @@ for /R "%directory%" %%F in (*.pdf) do (
     REM Modified code to use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
   
-    REM Check if Ghostscript encountered an error during compression
-    if errorlevel 1 (
-      echo Error compressing file: %%F
-      echo Skipping compression and keeping the original file.
+    REM Check if the compressed file was created successfully
+    if exist "!output!" (
+      REM Check the size of the compressed file
+      for %%A in ("!output!") do set /A "compressedSize=%%~zA"
 
-      REM Increment the progress counter for already compressed files
-      set /A "progress_already_compressed+=1"
+      REM Check if the compressed file size is less than 5 kilobytes
+      if !compressedSize! LSS 5120 (
+        echo Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted.
+        del "!output!"
+      ) else (
+        echo Compression successful. Deleting original file.
+        del "!input!"
+      )
     ) else (
-      echo Deleting original file.
-      del "!input!"
+      echo Compression failed. Original file will not be deleted.
     )
   )
 )

@@ -66,21 +66,23 @@ If you prefer a standalone executable for Windows, follow these steps:
 
 ## Script Functionality
 
-1. Check if [Ghostscript utility](https://www.ghostscript.com/) is installed and terminate the script execution if it is not (Windows batch script only).
+1. Check if [Ghostscript utility](https://www.ghostscript.com/) is installed and terminate the script execution if it is not (_Windows batch script only_).
 
-2. The script displays the current version of Ghostscript.
+2. Checking whether a file has been compressed using a script before and whether it needs to be compressed (_Windows batch script V2 only_).
 
-3. The user is prompted to enter the path to the directory containing the PDF files.
+3. The script displays the current version of Ghostscript.
 
-4. The user is asked to select a compression level based on their desired quality for the compressed files.
+4. The user is prompted to enter the path to the directory containing the PDF files.
 
-5. The script searches for all PDF files in the specified directory.
+5. The user is asked to select a compression level based on their desired quality for the compressed files.
 
-6. Each file is compressed using Ghostscript with the selected compression level.
+6. The script searches for all PDF files in the specified directory.
 
-7. After compression, the user is prompted to confirm whether to delete the original file.
+7. Each file is compressed using Ghostscript with the selected compression level.
 
-8. Once all files are processed, a message is displayed to indicate that the compression is complete.
+8. After compression, the user is prompted to confirm whether to delete the original file.
+
+9. Once all files are processed, a message is displayed to indicate that the compression is complete.
 
 ## Notes
 

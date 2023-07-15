@@ -4,7 +4,6 @@ This script is a Windows batch process file written in the Batch command languag
 
 ![image](https://github.com/sergeiown/compress_PDF/assets/112722061/c7f287b9-d6f7-4951-9a52-7fc5248a3d5e)
 
-
 ## Prerequisites
 
 **Before running the script, ensure that you have the `Ghostscript utility` installed**
@@ -38,6 +37,8 @@ This original Windows batch script is designed for compressing very large number
 -   added the ability to compress all pdf files in all subdirectories relative to the path specified by the user.
 
 -   added checking the need for file compression.
+
+-   added a check for creating a compressed file and checking its size: if it is less than 5 kilobytes, we assume that the file does not contain correct data and save the original file.
 
 -   added additional information at the end of the script.
 

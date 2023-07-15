@@ -39,7 +39,7 @@ echo.
 echo -----------------------------
 
 
-REM Pause for 3 seconds and prompt for path input
+REM Pause for 2 seconds and prompt for path input
 timeout /t 2 >nul
 
 color 08
@@ -70,8 +70,10 @@ echo.
 
 REM Get the total count of PDF files in the directory and its subdirectories
 set /A "filecount=0"
+set /A "initialSize=0"
 for /R "%directory%" %%F in (*.pdf) do (
   set /A "filecount+=1"
+  for %%A in ("%%F") do set /A "initialSize+=%%~zA"
 )
 
 REM Reset the progress counter
@@ -112,41 +114,71 @@ for /R "%directory%" %%F in (*.pdf) do (
     REM Modified code to use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
   
-    echo Deleting original file.
-    del "!input!"
+    REM Check if Ghostscript encountered an error during compression
+    if errorlevel 1 (
+      echo Error compressing file: %%F
+      echo Skipping compression and keeping the original file.
+
+      REM Increment the progress counter for already compressed files
+      set /A "progress_already_compressed+=1"
+    ) else (
+      echo Deleting original file.
+      del "!input!"
+    )
   )
 )
 
 echo.
 
+REM Get the total size of the compressed files
+set /A "compressedSize=0"
+for /R "%directory%" %%F in (*_compressed.pdf) do (
+  for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
+)
+
+REM get the size in megabytes
+set /A "initialSizeMB=initialSize/10485"
+set /A "compressedSizeMB=compressedSize/10485"
+
+REM round the value to the second decimal place
+set /A "initialSizeMB=((initialSizeMB*10) + 5) / 1000"
+set /A "compressedSizeMB=((compressedSizeMB*10) + 5) / 1000"
+
+REM file size after compression and percentage compression
+set /A "sizeDifference=initialSizeMB-compressedSizeMB"
+set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
+
 REM Set the color to green for the specified line
 cls
 color 0A
 
-echo ------------------------------------------------------------------
+echo ==================================================================
 echo.
 echo Compression complete. All files have been compressed successfully.
 echo.
+echo ==================================================================
+
+timeout /t 1 >nul
+
+echo.
+echo Total files compressed               : !progress!
+echo.
+echo Files compressed during the session  : !progress_compression!
+echo.
+echo Files that don't require compression : !progress_already_compressed!
+echo.
 echo ------------------------------------------------------------------
 
 timeout /t 1 >nul
 
 echo.
-echo Total files compressed: !progress!
+echo Initial total size before            : %initialSizeMB%.%initialSize:~-2% MB
 echo.
-
-timeout /t 1 >nul
-
+echo Compressed total size after          : %compressedSizeMB%.%compressedSize:~-2% MB
 echo.
-echo Files are compressed during the session: !progress_compression!
+echo Compression ratio                    : %compressionRatio%%%
 echo.
-
-timeout /t 1 >nul
-
-echo.
-echo Files that don't require compression: !progress_already_compressed!
-echo.
-echo ------------------------------------------------------------------
+echo ==================================================================
 
 timeout /t 1 >nul
 

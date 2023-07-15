@@ -80,7 +80,7 @@ If you prefer a standalone executable for Windows, follow these steps:
 
 7. Each file is compressed using Ghostscript with the selected compression level.
 
-8. After compression, the user is prompted to confirm whether to delete the original file.
+8. After compression, the user is prompted to confirm whether to delete the original file. (_except for the Windows V2 batch script_)
 
 9. Once all files are processed, a message is displayed to indicate that the compression is complete.
 

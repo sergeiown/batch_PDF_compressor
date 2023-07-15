@@ -10,10 +10,17 @@ if errorlevel 1 (
     cls
     color 0C
 
+    echo ----------------------------------------------------------------
+    echo.
     echo Ghostscript is not installed.
     echo Please download and install Ghostscript from the following link:
     echo https://ghostscript.com/releases/gsdnld.html
+    echo.
+    echo ----------------------------------------------------------------
 
+    timeout /t 2 >nul
+
+    echo.
     pause
     color
 
@@ -23,16 +30,21 @@ if errorlevel 1 (
 REM Display current Ghostscript version
 color 0A
 
+echo -----------------------------
+echo.
 echo Current Ghostscript version:
 gswin64c.exe --version
 echo It's okay, let's get started.
 echo.
+echo -----------------------------
+
 
 REM Pause for 3 seconds and prompt for path input
 timeout /t 2 >nul
 
 color 08
 
+echo.
 echo Enter the path to the directory with PDF files:
 echo.
 set /p directory=
@@ -112,7 +124,9 @@ cls
 color 0A
 
 echo ------------------------------------------------------------------
+echo.
 echo Compression complete. All files have been compressed successfully.
+echo.
 echo ------------------------------------------------------------------
 
 timeout /t 1 >nul

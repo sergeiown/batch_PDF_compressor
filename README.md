@@ -2,7 +2,7 @@
 
 This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels. If you prefer to use JavaScript, there is an alternative script available along with a win64 executable.
 
-![image](https://github.com/sergeiown/compress_PDF/assets/112722061/be151c88-a6fd-4b14-b629-d7a452c9a562)
+![image](https://github.com/sergeiown/compress_PDF/assets/112722061/c14d2873-b500-4f86-8e73-56ee0d9ceb0e)
 
 ## Prerequisites
 

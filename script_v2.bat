@@ -1,7 +1,8 @@
+@REM This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels
+
 @echo off
 
-REM Enable delayed variable expansion
-REM This allows obtaining updated variable values inside loops and code blocks
+@REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
 
 REM Check if Ghostscript is installed

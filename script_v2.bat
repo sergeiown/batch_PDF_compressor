@@ -10,13 +10,13 @@ if errorlevel 1 (
     REM Set the color to red
     color 0C
 
-    echo ----------------------------------------------------------------
-    echo.
-    echo Ghostscript is not installed.
-    echo Please download and install Ghostscript from the following link:
-    echo https://ghostscript.com/releases/gsdnld.html
-    echo.
-    echo ----------------------------------------------------------------
+    echo --------------------------------------------------------------------
+    echo |                                                                  |
+    echo | Ghostscript is not installed.                                    |
+    echo | Please download and install Ghostscript from the following link: |
+    echo | https://ghostscript.com/releases/gsdnld.html                     |
+    echo |                                                                  |
+    echo --------------------------------------------------------------------
 
     timeout /t 2 >nul
 
@@ -31,7 +31,7 @@ REM Set the color to green and display current Ghostscript version
 color 0A
 
 echo -----------------------------
-echo.
+echo 
 echo Current Ghostscript version:
 gswin64c.exe --version
 echo It's okay, let's get started.

@@ -16,6 +16,8 @@ Additional information about the compression process and results is provided dur
 
 **Current stable version of the batch script is [script_v2.bat](https://github.com/sergeiown/compress_PDF/blob/main/script_v2.bat)**
 
+![image](https://github.com/sergeiown/compress_PDF/assets/112722061/744a6397-8747-4773-b980-b7e98176bb05)
+
 ## Usage
 
 There are three different ways to use the PDF Compression Script, depending on your preference and the operating system you are using. Choose the appropriate method below:

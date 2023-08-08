@@ -339,6 +339,8 @@ REM Log a message about the completion of the work along with the date and time 
 echo. >> %outputFile%
 echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
+echo Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md & Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md >> %outputFile%
+echo. & echo. >> %outputFile%
 pause
 color
 start notepad "%outputFile%"

@@ -1,6 +1,7 @@
 @REM This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels
 
 @echo off
+color 1F
 
 REM Language selection
 choice /c 12 /n /m "Choose your language (1 - English, 2 - Ukrainian): "
@@ -31,7 +32,7 @@ if "%lang%"=="2" (
     set "msg_11=Пропуск файлу:"
     set "msg_12=Стиснення не потрібно. Файл вже було стиснуто."
     set "msg_13=Загальний прогрес:"
-    set "msg_14=Стискаємо файл:"
+    set "msg_14=Триває стиснення файлу:"
     set "msg_15=Стиснення не вдалося. Розмір стисненого файлу менше 5 кілобайт. Оригінальний файл не буде видалено."
     set "msg_16=Успішне стиснення. Видалення оригінального файлу."
     set "msg_17=Стиснення не вдалося. Оригінальний файл не буде видалено."
@@ -42,6 +43,7 @@ if "%lang%"=="2" (
     set "msg_22=Початковий загальний розмір до     :"
     set "msg_23=Стиснений загальний розмір після   :"
     set "msg_24=Ступінь стиснення                  :"
+    set "msg_25=Вказаний шлях не існує."
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
     set "long_separator=-----------------------------------------------------"
@@ -60,7 +62,7 @@ if "%lang%"=="2" (
     set "msg_11=Skipping file:"
     set "msg_12=Compression not required. File has already been compressed."
     set "msg_13=Total progress:"
-    set "msg_14=Compressing file:"
+    set "msg_14=Compressing file is in progress:"
     set "msg_15=Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted."
     set "msg_16=Compression successful. Deleting original file."
     set "msg_17=Compression failed. Original file will not be deleted."
@@ -71,6 +73,7 @@ if "%lang%"=="2" (
     set "msg_22=Initial total size before            :"
     set "msg_23=Compressed total size after          :"
     set "msg_24=Compression ratio                    :"
+    set "msg_25=The provided path does not exist."
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
     set "long_separator=------------------------------------------------------------------"
@@ -80,19 +83,22 @@ if "%lang%"=="2" (
 @REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
 
+@REM Determining the path to the log file
+set "outputFile=%USERPROFILE%\documents\compression_log.txt"
+
 REM Check if Ghostscript is installed
 where gswin64c.exe >nul 2>&1
 if errorlevel 1 (
     cls
-    color 0C
+    color 1C
 
-    echo %error_separator%
-    echo.
-    echo %msg_1%
-    echo %msg_2%
-    echo https://ghostscript.com/releases/gsdnld.html
-    echo.
-    echo %error_separator%
+    echo %error_separator% & echo %error_separator% > %outputFile%
+    echo. & echo. >> %outputFile%
+    echo %msg_1% & echo %msg_1% >> %outputFile%
+    echo %msg_2% & echo %msg_2% >> %outputFile%
+    echo https://ghostscript.com/releases/gsdnld.html & echo https://ghostscript.com/releases/gsdnld.html >> %outputFile%
+    echo. & echo. >> %outputFile%
+    echo %error_separator% & echo %error_separator% >> %outputFile%
 
     timeout /t 2 >nul
 
@@ -100,30 +106,39 @@ if errorlevel 1 (
     pause
     color
 
+    start notepad "%outputFile%"
     exit /b
 )
 
 REM Display current Ghostscript version
-color 0A
+color 1A
 
-echo %short_separator%
-echo.
-echo %msg_3%
-gswin64c.exe --version
-echo %msg_4%
-echo.
-echo %short_separator%
+echo %short_separator% & echo %short_separator% > %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_3% & echo %msg_3% >> %outputFile%
+gswin64c.exe --version & gswin64c.exe --version >> %outputFile%
+echo %msg_4% & echo %msg_4% >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %short_separator% & echo %short_separator% >> %outputFile%
 
 
 REM Pause for 2 seconds and prompt for path input
 timeout /t 2 >nul
 
-color 0F
+color 1F
 
+
+:input_path
 echo.
 echo %msg_5%
 echo.
 set /p directory=
+
+rem Check if the directory exists
+if not exist "%directory%" (
+    echo %msg_25%
+    goto input_path
+)
 
 echo.
 echo %short_separator%
@@ -238,7 +253,7 @@ set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
 
 REM Set the color to green for the specified line
 cls
-color 0A
+color 1A
 
 echo %double_separator%
 echo.
@@ -262,7 +277,7 @@ timeout /t 1 >nul
 echo.
 echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB
 echo.
-echo %$msg_23% %compressedSizeMB%.%compressedSize:~-2% MB
+echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB
 echo.
 echo %msg_24% %compressionRatio%%%
 echo.
@@ -273,3 +288,4 @@ timeout /t 1 >nul
 echo.
 pause
 color
+start notepad "%outputFile%"

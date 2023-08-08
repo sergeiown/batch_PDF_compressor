@@ -1,4 +1,4 @@
-@REM This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels
+@REM MIT License Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels and options
 
 @echo off
 color 1F

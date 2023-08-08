@@ -70,6 +70,7 @@ if "%lang%"=="2" (
     set "msg_25=Вказаний шлях не існує."
     set "msg_26=Шлях до каталогу з файлами PDF:"
     set "msg_27=Не вибрано папку. Вихід."
+    set "copyright=Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
     set "long_separator=-----------------------------------------------------"
@@ -102,6 +103,7 @@ if "%lang%"=="2" (
     set "msg_25=The provided path does not exist."
     set "msg_26=Path to the directory with PDF files:"
     set "msg_27=No folder selected. Exiting."
+    set "copyright=Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
     set "long_separator=------------------------------------------------------------------"
@@ -339,7 +341,7 @@ REM Log a message about the completion of the work along with the date and time 
 echo. >> %outputFile%
 echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
-echo Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md & Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md >> %outputFile%
+echo %copyright% & %copyright% >> %outputFile%
 echo. & echo. >> %outputFile%
 pause
 color

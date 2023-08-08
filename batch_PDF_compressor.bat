@@ -47,7 +47,7 @@ if "%lang%"=="2" (
     set "msg_2=Будь ласка, завантажте та встановіть Ghostscript за наступним посиланням:"
     set "msg_3=Поточна версія Ghostscript:"
     set "msg_4=Гаразд, давайте почнемо."
-    set "msg_5=Введіть шлях до каталогу з файлами PDF:"
+    set "msg_5=Оберіть каталог з файлами PDF:"
     set "msg_6=Низька якість (екран)"
     set "msg_7=Середня якість (електронна книга)"
     set "msg_8=Висока якість (принтер)"
@@ -69,6 +69,7 @@ if "%lang%"=="2" (
     set "msg_24=Ступінь стиснення                  :"
     set "msg_25=Вказаний шлях не існує."
     set "msg_26=Шлях до каталогу з файлами PDF:"
+    set "msg_27=Не вибрано папку. Вихід."
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
     set "long_separator=-----------------------------------------------------"
@@ -78,7 +79,7 @@ if "%lang%"=="2" (
     set "msg_2=Please download and install Ghostscript from the following link:"
     set "msg_3=Current Ghostscript version:"
     set "msg_4=It's okay, let's get started."
-    set "msg_5=Enter the path to the directory with PDF files:"
+    set "msg_5=Select the directory with the PDF files:"
     set "msg_6=Low quality (screen)"
     set "msg_7=Medium quality (ebook)"
     set "msg_8=High quality (printer)"
@@ -100,6 +101,7 @@ if "%lang%"=="2" (
     set "msg_24=Compression ratio                    :"
     set "msg_25=The provided path does not exist."
     set "msg_26=Path to the directory with PDF files:"
+    set "msg_27=No folder selected. Exiting."
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
     set "long_separator=------------------------------------------------------------------"
@@ -151,13 +153,21 @@ timeout /t 2 >nul
 
 color 1F
 
-
+REM Selecting a directory using the FolderBrowserDialog
 :input_path
 echo. & echo. >> %outputFile%
 echo %msg_5%
 echo.
-set /p directory=
-echo %msg_26% %directory% >> %outputFile%
+set "folderSelection="
+for /f "delims=" %%d in ('powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.FolderBrowserDialog; $f.ShowDialog(); $f.SelectedPath"') do set "folderSelection=%%d"
+
+if "%folderSelection%"=="" (
+    echo %msg_27% >> %outputFile%
+    exit /b
+)
+
+set "directory=%folderSelection%"
+echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
 
 REM Check if the directory exists

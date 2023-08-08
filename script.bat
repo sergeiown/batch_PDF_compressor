@@ -7,19 +7,19 @@ color 1F
 set "outputFile=%USERPROFILE%\documents\compression_log.txt"
 
 REM Get the current date and time
-for /f "tokens=1-4 delims=/ " %%a in ('date /t') do (
+for /f "tokens=1-4 delims= " %%a in ('date /t') do (
     set "month=%%a"
     set "day=%%b"
     set "year=%%c"
 )
-for /f "tokens=1-3 delims=:." %%a in ("%time%") do (
+for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
     set "hour=%%a"
     set "minute=%%b"
     set "second=%%c"
 )
 
 REM Log the current date time and path to the log file before starting work
-echo Start time: %year%-%month%-%day% %hour%:%minute%:%second% > %outputFile%
+echo Start time: %year%%month%%day% %hour%:%minute%:%second% > %outputFile%
 echo. >> %outputFile%
 echo Log file path: %outputFile% >> %outputFile%
 echo. >> %outputFile%
@@ -29,14 +29,13 @@ choice /c 12 /n /m "Choose your language (1 - English, 2 - Ukrainian): "
 set "lang=%errorlevel%"
 
 if "%lang%"=="2" (
-    REM Set code page for Ukrainian
+    REM Set universal UTF-8 code page for Ukrainian and English
     chcp 65001 >nul
     echo Обрана мова: українська >> %outputFile%
     echo. >> %outputFile%
     cls
 ) else (
-    REM Keep default code page for English
-    chcp 437 >nul
+    chcp 65001 >nul
     echo Selected language: English >> %outputFile%
     echo. >> %outputFile%
     cls
@@ -168,22 +167,21 @@ echo %short_separator% & echo %short_separator% >> %outputFile%
 echo. & echo. >> %outputFile%
 
 REM Add compression level options
-echo 1 - %msg_6% & echo 1 - %msg_6% >> %outputFile%
-echo 2 - %msg_7% & echo 2 - %msg_7% >> %outputFile%
-echo 3 - %msg_8% & echo 2 - %msg_8% >> %outputFile%
-echo 4 - %msg_9% & echo 2 - %msg_9% >> %outputFile%
+echo 1 - %msg_6%
+echo 2 - %msg_7%
+echo 3 - %msg_8%
+echo 4 - %msg_9%
 echo. & echo. >> %outputFile%
 
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
-echo %compresslevel% >> %outputFile%
-echo. >> %outputFile%
 
 REM Add logic to choose the corresponding compression level
-if "%compresslevel%"=="1" set "pdfsettings=/screen"
-if "%compresslevel%"=="2" set "pdfsettings=/ebook"
-if "%compresslevel%"=="3" set "pdfsettings=/printer"
-if "%compresslevel%"=="4" set "pdfsettings=/prepress"
+if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo Compression level: %msg_6% >> %outputFile%
+if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo Compression level: %msg_7% >> %outputFile%
+if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo Compression level: %msg_8% >> %outputFile%
+if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo Compression level: %msg_9% >> %outputFile%
+echo. >> %outputFile%
 
 timeout /t 2 >nul
 cls
@@ -312,9 +310,21 @@ echo %double_separator% & echo %double_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
+REM Get the current date and time
+for /f "tokens=1-4 delims= " %%a in ('date /t') do (
+    set "month=%%a"
+    set "day=%%b"
+    set "year=%%c"
+)
+for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
+    set "hour=%%a"
+    set "minute=%%b"
+    set "second=%%c"
+)
+
 REM Log a message about the completion of the work along with the date and time of completion
 echo. >> %outputFile%
-echo Finish time: %year%-%month%-%day% %hour%:%minute%:%second% >> %outputFile%
+echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
 pause
 color

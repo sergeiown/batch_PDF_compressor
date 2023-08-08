@@ -30,8 +30,8 @@ if errorlevel 1 (
     echo ----------------------------------------------------------------
     echo.
     if "%lang%"=="2" (
-        echo Ghostscript is not installed.
-        echo Please download and install Ghostscript from the following link:
+        echo Ghostscript не встановлено.
+        echo Будь ласка, завантажте та встановіть Ghostscript за посиланням:
     ) else (
         echo Ghostscript is not installed.
         echo Please download and install Ghostscript from the following link:
@@ -57,7 +57,7 @@ echo.
 echo|set /p=Ghostscript: & gswin64c.exe --version
 echo.
 if "%lang%"=="2" (
-    echo Everything's fine, let's get started.
+    echo Все гаразд, давайте почнемо.
 ) else (
     echo It's okay, let's get started.
 )
@@ -71,7 +71,7 @@ color 08
 
 echo.
 if "%lang%"=="2" (
-    echo Enter the path to the directory with PDF files:
+    echo Введіть шлях до каталогу з файлами PDF:
 ) else (
     echo Enter the path to the directory with PDF files:
 )
@@ -79,25 +79,30 @@ echo.
 set /p directory=
 
 echo.
+echo -----------------------------
+echo.
 
 REM Adding compression level options
+
 if "%lang%"=="2" (
-    echo Choose compression level:
-    echo 1 - Low quality (screen)
-    echo 2 - Medium quality (ebook)
-    echo 3 - High quality (printer)
-    echo 4 - Ultra quality (prepress)
+    echo "1 - Низька якість (вивід на екран)"
+    echo "2 - Середня якість (електронна книга)"
+    echo "3 - Висока якість (принтер)"
+    echo "4 - Надвисока якість (для друку)"
+    echo.
 ) else (
-    echo Select compression level:
-    echo 1 - Low quality (screen)
-    echo 2 - Medium quality (ebook)
-    echo 3 - High quality (printer)
-    echo 4 - Ultra quality (prepress)
+    echo "1 - Low quality (screen)"
+    echo "2 - Medium quality (ebook)"
+    echo "3 - High quality (printer)"
+    echo "4 - Ultra quality (prepress)"
+    echo.
 )
-echo.
-choice /c 1234 /n /m "Enter your choice: "
-set "compresslevel=%errorlevel%"
-echo.
+
+if "%lang%"=="2" (
+    echo|set /p=Виберіть рівень стиснення: & choice /c 1234 /n /m " " & set "compresslevel=%errorlevel%"
+) else (
+    echo|set /p=Choose a compression level: & choice /c 1234 /n /m " " & set "compresslevel=%errorlevel%"
+)
 
 REM Get total count and size of PDF files in the directory and its subdirectories
 set /A "filecount=0"
@@ -124,8 +129,8 @@ for /R "%directory%" %%F in (*.pdf) do (
     REM File is already compressed, skip compression and deletion
     echo ---
     if "%lang%"=="2" (
-        echo Skipping file: %%F
-        echo Compression not required. File has already been compressed.
+        echo Пропускаємо файл: %%F
+        echo Стиснення не потрібне. Файл вже було стиснуто.
     ) else (
         echo Skipping file: %%F
         echo Compression not required. File has already been compressed.
@@ -135,12 +140,18 @@ for /R "%directory%" %%F in (*.pdf) do (
     set /A "progress+=1"
     set /A "progress_already_compressed+=1"
 
-    echo Progress: !progress! / !filecount!
+    REM Calculate and display current progress percentage
+    set /A "progress_percentage=(progress * 100) / filecount"
+    if "%lang%"=="2" (
+        echo Прогрес: !progress_percentage!%% / !filecount!
+    ) else (
+        echo Progress: !progress_percentage!%% / !filecount!
+    )
   ) else (
     REM File requires compression
     echo ---
     if "%lang%"=="2" (
-        echo Compressing file: %%F
+        echo Стискаємо файл: %%F
     ) else (
         echo Compressing file: %%F
     )
@@ -149,7 +160,13 @@ for /R "%directory%" %%F in (*.pdf) do (
     set /A "progress+=1"
     set /A "progress_compression+=1"
   
-    echo Progress: !progress! / !filecount!
+    REM Calculate and display current progress percentage
+    set /A "progress_percentage=(progress * 100) / filecount"
+    if "%lang%"=="2" (
+        echo Прогрес: !progress_percentage!%% / !filecount!
+    ) else (
+        echo Progress: !progress_percentage!%% / !filecount!
+    )
   
     REM Modified code to use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
@@ -162,14 +179,14 @@ for /R "%directory%" %%F in (*.pdf) do (
       REM Check if compressed file size is less than 5 kilobytes
       if !compressedSize! LSS 5120 (
         if "%lang%"=="2" (
-            echo Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted.
+            echo Стиснення завершилося невдало. Розмір стиснутого файлу менше 5 кілобайт. Оригінальний файл не буде видалено.
         ) else (
             echo Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted.
         )
         del "!output!"
       ) else (
         if "%lang%"=="2" (
-            echo Compression successful. Deleting original file.
+            echo Стиснення успішно завершено. Видалення оригінального файлу.
         ) else (
             echo Compression successful. Deleting original file.
         )
@@ -177,7 +194,7 @@ for /R "%directory%" %%F in (*.pdf) do (
       )
     ) else (
       if "%lang%"=="2" (
-          echo Compression failed. Original file will not be deleted.
+          echo Стиснення не вдалося. Оригінальний файл не буде видалено.
       ) else (
           echo Compression failed. Original file will not be deleted.
       )
@@ -212,7 +229,7 @@ color 0A
 echo ==================================================================
 echo.
 if "%lang%"=="2" (
-    echo Compression complete. All files have been compressed successfully.
+    echo Стиснення завершено. Усі файли було успішно стиснуто.
 ) else (
     echo Compression complete. All files have been compressed successfully.
 )
@@ -223,19 +240,19 @@ timeout /t 1 >nul
 
 echo.
 if "%lang%"=="2" (
-    echo Total files compressed               : !progress!
+    echo Всього стиснуто файлів               : !progress!
 ) else (
     echo Total files compressed               : !progress!
 )
 echo.
 if "%lang%"=="2" (
-    echo Files compressed during the session  : !progress_compression!
+    echo Файли, стиснуті під час сеансу  : !progress_compression!
 ) else (
     echo Files compressed during the session  : !progress_compression!
 )
 echo.
 if "%lang%"=="2" (
-    echo Files that don't require compression : !progress_already_compressed!
+    echo Файли, які не потребують стиснення : !progress_already_compressed!
 ) else (
     echo Files that don't require compression : !progress_already_compressed!
 )
@@ -246,19 +263,19 @@ timeout /t 1 >nul
 
 echo.
 if "%lang%"=="2" (
-    echo Initial total size before            : %initialSizeMB%.%initialSize:~-2% MB
+    echo Початковий загальний розмір до            : %initialSizeMB%.%initialSize:~-2% MB
 ) else (
     echo Initial total size before            : %initialSizeMB%.%initialSize:~-2% MB
 )
 echo.
 if "%lang%"=="2" (
-    echo Compressed total size after          : %compressedSizeMB%.%compressedSize:~-2% MB
+    echo Стислий загальний розмір після          : %compressedSizeMB%.%compressedSize:~-2% MB
 ) else (
     echo Compressed total size after          : %compressedSizeMB%.%compressedSize:~-2% MB
 )
 echo.
 if "%lang%"=="2" (
-    echo Compression ratio                    : %compressionRatio%%%
+    echo Ступінь стиснення                    : %compressionRatio%%%
 ) else (
     echo Compression ratio                    : %compressionRatio%%%
 )

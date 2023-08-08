@@ -3,6 +3,27 @@
 @echo off
 color 1F
 
+@REM Determining the path to the log file
+set "outputFile=%USERPROFILE%\documents\compression_log.txt"
+
+REM Get the current date and time
+for /f "tokens=1-4 delims=/ " %%a in ('date /t') do (
+    set "month=%%a"
+    set "day=%%b"
+    set "year=%%c"
+)
+for /f "tokens=1-3 delims=:." %%a in ("%time%") do (
+    set "hour=%%a"
+    set "minute=%%b"
+    set "second=%%c"
+)
+
+REM Log the current date time and path to the log file before starting work
+echo Start time: %year%-%month%-%day% %hour%:%minute%:%second% > %outputFile%
+echo. >> %outputFile%
+echo Log file path: %outputFile% >> %outputFile%
+echo. >> %outputFile%
+
 REM Language selection
 choice /c 12 /n /m "Choose your language (1 - English, 2 - Ukrainian): "
 set "lang=%errorlevel%"
@@ -10,10 +31,14 @@ set "lang=%errorlevel%"
 if "%lang%"=="2" (
     REM Set code page for Ukrainian
     chcp 65001 >nul
+    echo Обрана мова: українська >> %outputFile%
+    echo. >> %outputFile%
     cls
 ) else (
     REM Keep default code page for English
     chcp 437 >nul
+    echo Selected language: English >> %outputFile%
+    echo. >> %outputFile%
     cls
 )
 
@@ -83,16 +108,13 @@ if "%lang%"=="2" (
 @REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
 
-@REM Determining the path to the log file
-set "outputFile=%USERPROFILE%\documents\compression_log.txt"
-
 REM Check if Ghostscript is installed
 where gswin64c.exe >nul 2>&1
 if errorlevel 1 (
     cls
     color 1C
 
-    echo %error_separator% & echo %error_separator% > %outputFile%
+    echo %error_separator% & echo %error_separator% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %msg_1% & echo %msg_1% >> %outputFile%
     echo %msg_2% & echo %msg_2% >> %outputFile%
@@ -113,7 +135,7 @@ if errorlevel 1 (
 REM Display current Ghostscript version
 color 1A
 
-echo %short_separator% & echo %short_separator% > %outputFile%
+echo %short_separator% & echo %short_separator% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %msg_3% & echo %msg_3% >> %outputFile%
 gswin64c.exe --version & gswin64c.exe --version >> %outputFile%
@@ -129,29 +151,33 @@ color 1F
 
 
 :input_path
-echo.
-echo %msg_5%
-echo.
+echo. & echo. >> %outputFile%
+echo %msg_5% & echo %msg_5% >> %outputFile%
+echo. & echo. >> %outputFile%
 set /p directory=
+echo %directory% >> %outputFile%
 
-rem Check if the directory exists
+REM Check if the directory exists
 if not exist "%directory%" (
-    echo %msg_25%
+    echo %msg_25% & echo %msg_25% >> %outputFile%
     goto input_path
 )
 
-echo.
-echo %short_separator%
-echo.
+echo. & echo. >> %outputFile%
+echo %short_separator% & echo %short_separator% >> %outputFile%
+echo. & echo. >> %outputFile%
 
 REM Add compression level options
-echo 1 - %msg_6%
-echo 2 - %msg_7%
-echo 3 - %msg_8%
-echo 4 - %msg_9%
-echo.
+echo 1 - %msg_6% & echo 1 - %msg_6% >> %outputFile%
+echo 2 - %msg_7% & echo 2 - %msg_7% >> %outputFile%
+echo 3 - %msg_8% & echo 2 - %msg_8% >> %outputFile%
+echo 4 - %msg_9% & echo 2 - %msg_9% >> %outputFile%
+echo. & echo. >> %outputFile%
+
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
+echo %compresslevel% >> %outputFile%
+echo. >> %outputFile%
 
 REM Add logic to choose the corresponding compression level
 if "%compresslevel%"=="1" set "pdfsettings=/screen"
@@ -181,13 +207,14 @@ for /R "%directory%" %%F in (*.pdf) do (
   set "output=%%~dpF%%~nF_compressed.pdf"
   
   REM Check if the file has already been compressed by checking the filename suffix
-  echo %%~nF | find /i "_compressed" >nul
+  echo. & echo. >> %outputFile%
+  echo %%~nF | find /i "_compressed" >nul & echo %%~nF | find /i "_compressed" >nul >> %outputFile%
 
   if not errorlevel 1 (
     REM File has already been compressed, skip compression and deletion
     cls
-    echo %msg_11% %%F
-    echo %msg_12%
+    echo %msg_11% %%F & echo %msg_11% %%F >> %outputFile%
+    echo %msg_12% & echo %msg_12% >> %outputFile%
 
     REM Increment the progress counter
     set /A "progress+=1"
@@ -195,11 +222,11 @@ for /R "%directory%" %%F in (*.pdf) do (
 
     REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
-    echo %msg_13% !progress_percentage!%%
-  ) else (
+    echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
+    ) else (
     REM File needs to be compressed
     cls
-    echo %msg_14% %%F
+    echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
 
     REM Increment the progress counter
     set /A "progress+=1"
@@ -207,8 +234,8 @@ for /R "%directory%" %%F in (*.pdf) do (
   
     REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
-    echo %msg_13% !progress_percentage!%%
-  
+    echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
+      
     REM Modified code to use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
   
@@ -219,19 +246,19 @@ for /R "%directory%" %%F in (*.pdf) do (
 
       REM Check if the compressed file size is less than 5 kilobytes
       if !compressedSize! LSS 5120 (
-        echo %msg_15%
+        echo %msg_15% & echo %msg_15% >> %outputFile%
         del "!output!"
       ) else (
-        echo %msg_16%
+        echo %msg_16% & echo %msg_16% >> %outputFile%
         del "!input!"
       )
     ) else (
-      echo %msg_17%
+      echo %msg_17% & echo %msg_17% >> %outputFile%
     )
   )
 )
 
-echo.
+echo. & echo. >> %outputFile%
 
 REM Get the total size of the compressed files
 set /A "compressedSize=0"
@@ -255,37 +282,40 @@ REM Set the color to green for the specified line
 cls
 color 1A
 
-echo %double_separator%
-echo.
-echo %msg_18%
-echo.
-echo %double_separator%
+echo %double_separator% & echo %double_separator% >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_18% & echo %msg_18% >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %double_separator% & echo %double_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
-echo.
-echo %msg_19% !progress!
-echo.
-echo %msg_20% !progress_compression!
-echo.
-echo %msg_21% !progress_already_compressed!
-echo.
-echo %long_separator%
+echo. & echo. >> %outputFile%
+echo %msg_19% !progress! & echo %msg_19% !progress! >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_20% !progress_compression! & echo %msg_20% !progress_compression! >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_21% !progress_already_compressed! & echo %msg_21% !progress_already_compressed! >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %long_separator% & echo %long_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
-echo.
-echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB
-echo.
-echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB
-echo.
-echo %msg_24% %compressionRatio%%%
-echo.
-echo %double_separator%
+echo. & echo. >> %outputFile%
+echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB & echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB & echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_24% %compressionRatio%%% & echo %msg_24% %compressionRatio%%% >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %double_separator% & echo %double_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
-echo.
+REM Log a message about the completion of the work along with the date and time of completion
+echo. >> %outputFile%
+echo Finish time: %year%-%month%-%day% %hour%:%minute%:%second% >> %outputFile%
+echo. & echo. >> %outputFile%
 pause
 color
 start notepad "%outputFile%"

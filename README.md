@@ -2,10 +2,14 @@
 
 This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) for performing the compression.
 
+![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/6ea4912f-5d5a-43d2-8fab-5a3da690f926)
+
 ### Requirements
 
 1. Installed [Ghostscript](https://www.ghostscript.com/).
 2. Windows operating system.
+
+![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/b316d6b8-2e39-417f-915e-50e6ad23b127)
 
 ### Script Functionality
 
@@ -27,6 +31,8 @@ The script offers the following features:
 4. Enter the path to the directory containing the PDF files to be compressed.
 5. Select the compression level (1-4) corresponding to the provided options.
 6. After completion, the log file will open, containing information about processed files and compression results.
+
+![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/c5716406-4982-49d7-be7f-facd45ae4d0a)
 
 ### License
 

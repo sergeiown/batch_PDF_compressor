@@ -4,7 +4,7 @@
 color 1F
 
 @REM Determining the path to the log file
-set "outputFile=%USERPROFILE%\documents\compression_log.txt"
+set "outputFile=%USERPROFILE%\documents\log.txt"
 
 REM Get the current date and time
 for /f "tokens=1-4 delims= " %%a in ('date /t') do (
@@ -32,12 +32,12 @@ if "%lang%"=="2" (
     REM Set universal UTF-8 code page for Ukrainian and English
     chcp 65001 >nul
     echo Обрана мова: українська >> %outputFile%
-    echo. >> %outputFile%
+    echo.
     cls
 ) else (
     chcp 65001 >nul
     echo Selected language: English >> %outputFile%
-    echo. >> %outputFile%
+    echo.
     cls
 )
 
@@ -54,7 +54,7 @@ if "%lang%"=="2" (
     set "msg_9=Надвисока якість (до друку)"
     set "msg_10=Виберіть рівень стиснення:"
     set "msg_11=Пропуск файлу:"
-    set "msg_12=Стиснення не потрібно. Файл вже було стиснуто."
+    set "msg_12=Стиснення не потрібне. Файл вже було стиснуто."
     set "msg_13=Загальний прогрес:"
     set "msg_14=Триває стиснення файлу:"
     set "msg_15=Стиснення не вдалося. Розмір стисненого файлу менше 5 кілобайт. Оригінальний файл не буде видалено."
@@ -68,6 +68,7 @@ if "%lang%"=="2" (
     set "msg_23=Стиснений загальний розмір після   :"
     set "msg_24=Ступінь стиснення                  :"
     set "msg_25=Вказаний шлях не існує."
+    set "msg_26=Шлях до каталогу з файлами PDF:"
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
     set "long_separator=-----------------------------------------------------"
@@ -84,7 +85,7 @@ if "%lang%"=="2" (
     set "msg_9=Ultra quality (prepress)"
     set "msg_10=Select compression level:"
     set "msg_11=Skipping file:"
-    set "msg_12=Compression not required. File has already been compressed."
+    set "msg_12=No compression is required. File has already been compressed."
     set "msg_13=Total progress:"
     set "msg_14=Compressing file is in progress:"
     set "msg_15=Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted."
@@ -98,6 +99,7 @@ if "%lang%"=="2" (
     set "msg_23=Compressed total size after          :"
     set "msg_24=Compression ratio                    :"
     set "msg_25=The provided path does not exist."
+    set "msg_26=Path to the directory with PDF files:"
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
     set "long_separator=------------------------------------------------------------------"
@@ -134,13 +136,14 @@ if errorlevel 1 (
 REM Display current Ghostscript version
 color 1A
 
-echo %short_separator% & echo %short_separator% >> %outputFile%
+echo %short_separator%
 echo. & echo. >> %outputFile%
-echo %msg_3% & echo %msg_3% >> %outputFile%
-gswin64c.exe --version & gswin64c.exe --version >> %outputFile%
-echo %msg_4% & echo %msg_4% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %short_separator% & echo %short_separator% >> %outputFile%
+for /f "delims=" %%v in ('gswin64c.exe --version 2^>^&1') do set "ghostscript_version=%%v"
+echo %msg_3% %ghostscript_version% & echo %msg_3% %ghostscript_version% >> %outputFile%
+echo.
+echo %msg_4%
+echo.
+echo %short_separator%
 
 
 REM Pause for 2 seconds and prompt for path input
@@ -151,10 +154,11 @@ color 1F
 
 :input_path
 echo. & echo. >> %outputFile%
-echo %msg_5% & echo %msg_5% >> %outputFile%
-echo. & echo. >> %outputFile%
+echo %msg_5%
+echo.
 set /p directory=
-echo %directory% >> %outputFile%
+echo %msg_26% %directory% >> %outputFile%
+echo. >> %outputFile%
 
 REM Check if the directory exists
 if not exist "%directory%" (
@@ -162,26 +166,25 @@ if not exist "%directory%" (
     goto input_path
 )
 
-echo. & echo. >> %outputFile%
-echo %short_separator% & echo %short_separator% >> %outputFile%
-echo. & echo. >> %outputFile%
+echo.
+echo %short_separator%
+echo.
 
 REM Add compression level options
 echo 1 - %msg_6%
 echo 2 - %msg_7%
 echo 3 - %msg_8%
 echo 4 - %msg_9%
-echo. & echo. >> %outputFile%
+echo.
 
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
 
 REM Add logic to choose the corresponding compression level
-if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo Compression level: %msg_6% >> %outputFile%
-if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo Compression level: %msg_7% >> %outputFile%
-if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo Compression level: %msg_8% >> %outputFile%
-if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo Compression level: %msg_9% >> %outputFile%
-echo. >> %outputFile%
+if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo %msg_6% >> %outputFile%
+if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo %msg_7% >> %outputFile%
+if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo %msg_8% >> %outputFile%
+if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo %msg_9% >> %outputFile%
 
 timeout /t 2 >nul
 cls
@@ -276,9 +279,9 @@ REM file size after compression and percentage compression
 set /A "sizeDifference=initialSizeMB-compressedSizeMB"
 set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
 
-REM Set the color to green for the specified line
+REM Set the color to yellow
 cls
-color 1A
+color 1E
 
 echo %double_separator% & echo %double_separator% >> %outputFile%
 echo. & echo. >> %outputFile%

@@ -72,6 +72,7 @@ if "%lang%"=="2" (
     set "msg_27=Не вибрано папку. Вихід."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
+    set "culture=uk-UA"
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
     set "long_separator=-----------------------------------------------------"
@@ -106,6 +107,7 @@ if "%lang%"=="2" (
     set "msg_27=No folder selected. Exiting."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
+    set "culture=en-US"
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
     set "long_separator=------------------------------------------------------------------"
@@ -163,7 +165,7 @@ echo. & echo. >> %outputFile%
 echo %msg_5%
 echo.
 set "folderSelection="
-for /f "delims=" %%d in ('powershell -Command "Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.FolderBrowserDialog; $f.ShowDialog(); $f.SelectedPath"') do set "folderSelection=%%d"
+for /f "delims=" %%d in ('powershell -Command "$culture = [System.Globalization.CultureInfo]::CreateSpecificCulture('%culture%'); Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.FolderBrowserDialog; $f.Description = 'Виберіть директорію'; $f.Language = $culture; $f.ShowDialog(); $f.SelectedPath"') do set "folderSelection=%%d"
 
 if "%folderSelection%"=="" (
     echo %msg_27% >> %outputFile%

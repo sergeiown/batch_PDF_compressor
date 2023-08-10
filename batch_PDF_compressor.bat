@@ -69,7 +69,7 @@ if "%lang%"=="2" (
     set "msg_24=Ступінь стиснення                  :"
     set "msg_25=Вказаний шлях не існує."
     set "msg_26=Шлях до каталогу з файлами PDF:"
-    set "msg_27=Не вибрано папку. Вихід."
+    set "msg_27=Три невдалих спроби обрати каталог з файлами PDF. Вихід."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -105,7 +105,7 @@ if "%lang%"=="2" (
     set "msg_24=Compression ratio                    :"
     set "msg_25=The provided path does not exist."
     set "msg_26=Path to the folder with PDF files:"
-    set "msg_27=No folder selected. Exiting."
+    set "msg_27=Three failed attempts to select the folder with the PDF files. Exit."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -162,6 +162,9 @@ timeout /t 2 >nul
 color 1F
 
 REM Selecting a directory using the FolderBrowserDialog
+set "maxAttempts=3"
+set "attempt=1"
+
 :input_path
 echo. & echo. >> %outputFile%
 echo %msg_5%
@@ -169,19 +172,27 @@ echo.
 set "folderSelection="
 for /f "delims=" %%d in ('powershell -Command "$culture = [System.Globalization.CultureInfo]::CreateSpecificCulture('%culture%'); Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.FolderBrowserDialog; $f.Description = '%msg_5%'; $f.Language = $culture; $f.ShowDialog(); $f.SelectedPath"') do set "folderSelection=%%d"
 
-if "%folderSelection%"=="" (
-    echo %msg_27% >> %outputFile%
-    exit /b
-)
-
 set "directory=%folderSelection%"
 echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
 
-REM Check if the directory exists
+REM Check if the directory exists for three times
 if not exist "%directory%" (
     echo %msg_25% & echo %msg_25% >> %outputFile%
-    goto input_path
+    if %attempt% lss %maxAttempts% (
+        set /a "attempt+=1"
+        goto input_path
+    ) else (
+        cls
+        color 1C
+        echo. & echo. >> %outputFile%
+        echo %msg_27% & echo %msg_27% >> %outputFile%
+        echo. & echo. >> %outputFile%
+        pause
+        color
+        start notepad "%outputFile%"
+        exit /b
+    )
 )
 
 echo.

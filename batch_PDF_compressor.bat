@@ -72,6 +72,7 @@ if "%lang%"=="2" (
     set "msg_27=Не вибрано папку. Вихід."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
+    set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
     set "culture=uk-UA"
     set "error_separator=-------------------------------------------------------------------------"
     set "short_separator=---------------------------------------"
@@ -107,6 +108,7 @@ if "%lang%"=="2" (
     set "msg_27=No folder selected. Exiting."
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
+    set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
     set "culture=en-US"
     set "error_separator=----------------------------------------------------------------"
     set "short_separator=-----------------------------------------------"
@@ -127,7 +129,7 @@ if errorlevel 1 (
     echo. & echo. >> %outputFile%
     echo %msg_1% & echo %msg_1% >> %outputFile%
     echo %msg_2% & echo %msg_2% >> %outputFile%
-    echo https://ghostscript.com/releases/gsdnld.html & echo https://ghostscript.com/releases/gsdnld.html >> %outputFile%
+    echo %ghostscript_link% & echo %ghostscript_link% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %error_separator% & echo %error_separator% >> %outputFile%
 

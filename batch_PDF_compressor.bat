@@ -238,34 +238,30 @@ for /R "%directory%" %%F in (*.pdf) do (
   
   REM Check if the file has already been compressed by checking the filename suffix
   echo. & echo. >> %outputFile%
-  echo %%~nF | find /i "_compressed" >nul & echo %%~nF | find /i "_compressed" >nul >> %outputFile%
-
+  echo %%~nF | find /i "_compressed" >nul
+  
   if not errorlevel 1 (
     REM File has already been compressed, skip compression and deletion
     cls
-    echo %msg_11% %%F & echo %msg_11% %%F >> %outputFile%
-    echo %msg_12% & echo %msg_12% >> %outputFile%
-
     REM Increment the progress counter
     set /A "progress+=1"
     set /A "progress_already_compressed+=1"
-
     REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
+    echo %msg_11% %%F & echo %msg_11% %%F >> %outputFile%
+    echo %msg_12% & echo %msg_12% >> %outputFile%
     ) else (
     REM File needs to be compressed
     cls
-    echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
-
     REM Increment the progress counter
     set /A "progress+=1"
     set /A "progress_compression+=1"
-  
     REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
-      
+    echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
+
     REM Modified code to use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
   

@@ -28,7 +28,7 @@ The script offers the following features:
 1. Install Ghostscript if not already installed.
 2. Run the script by double-clicking it or through the command line.
 3. Choose your desired language (1 - English, 2 - Ukrainian).
-4. Enter the path to the directory containing the PDF files to be compressed.
+4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
 5. Select the compression level (1-4) corresponding to the provided options.
 6. After completion, the log file will open, containing information about processed files and compression results.
 

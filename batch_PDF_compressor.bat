@@ -307,23 +307,18 @@ for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
-REM Get the size in megabytes and kilobytes
-set /A "initialSizeMB=(initialSize) / 1048576"
-set /A "compressedSizeMB=(compressedSize) / 1048576"
+REM Get the size in kilobytes
 set /A "initialSizeKB=(initialSize + 512 ) / 1024"
 set /A "compressedSizeKB=(compressedSize + 512) / 1024"
 
 
 REM Compression percentage calculation
-if %initialSizeMB% gtr 0 (
-    set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
-) else (
-      if %initialSizeKB% gtr 0 (
-      set /A "compressionRatio=((initialSizeKB-compressedSizeKB)*100)/initialSizeKB"
-  ) else (
-      set "compressionRatio=%msg_29%"
-  )
+if %initialSizeKB% gtr 0 (
+    set /A "compressionRatio=((initialSizeKB-compressedSizeKB)*(-100))/initialSizeKB"
+    ) else (
+    set "compressionRatio=%msg_29%"
 )
+
 
 REM Set the color to yellow
 cls
@@ -338,24 +333,24 @@ echo %double_separator% & echo %double_separator% >> %outputFile%
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
-echo %msg_19%  !progress! & echo %msg_19%  !progress! >> %outputFile%
+echo %msg_19% !progress! & echo %msg_19% !progress! >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_20%  !progress_compression! & echo %msg_20%  !progress_compression! >> %outputFile%
+echo %msg_20% !progress_compression! & echo %msg_20% !progress_compression! >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_21%  !progress_already_compressed! & echo %msg_21%  !progress_already_compressed! >> %outputFile%
+echo %msg_21% !progress_already_compressed! & echo %msg_21% !progress_already_compressed! >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_28%  !progress_error! & echo %msg_28%  !progress_error! >> %outputFile%
+echo %msg_28% !progress_error! & echo %msg_28% !progress_error! >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %long_separator% & echo %long_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
-echo %msg_22%  %initialSizeMB%.%initialSizeKB:~-2% MB & echo %msg_22%  %initialSizeMB%.%initialSizeKB:~-2% MB >> %outputFile%
+echo %msg_22% %initialSizeKB%.%initialSizeKB:~-2% KB & echo %msg_22% %initialSizeKB%.%initialSizeKB:~-2% KB >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_23%  %compressedSizeMB%.%compressedSizeKB:~-2% MB & echo %msg_23%  %compressedSizeMB%.%compressedSizeKB:~-2% MB >> %outputFile%
+echo %msg_24% %compressionRatio% %% & echo %msg_24% %compressionRatio% %% >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_24%  %compressionRatio% %% & echo %msg_24%  %compressionRatio% %% >> %outputFile%
+echo %msg_23% %compressedSizeKB%.%compressedSizeKB:~-2% KB & echo %msg_23% %compressedSizeKB%.%compressedSizeKB:~-2% KB >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
 

@@ -159,7 +159,6 @@ echo %msg_4%
 echo.
 echo %short_separator%
 
-
 REM Pause for 2 seconds and prompt for path input
 timeout /t 2 >nul
 
@@ -311,14 +310,12 @@ REM Get the size in kilobytes
 set /A "initialSizeKB=(initialSize + 512 ) / 1024"
 set /A "compressedSizeKB=(compressedSize + 512) / 1024"
 
-
 REM Compression percentage calculation
 if %initialSizeKB% gtr 0 (
     set /A "compressionRatio=((initialSizeKB-compressedSizeKB)*(-100))/initialSizeKB"
     ) else (
     set "compressionRatio=%msg_29%"
 )
-
 
 REM Set the color to yellow
 cls

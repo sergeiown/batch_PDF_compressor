@@ -301,13 +301,13 @@ for /R "%directory%" %%F in (*.pdf) do (
 
 echo. & echo. >> %outputFile%
 
-REM Get the total size of the compressed files
+REM Get the total size of the files after compression
 set /A "compressedSize=0"
 for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
-REM Get the size in megabytes
+REM Get the size in megabytes and kilobytes
 set /A "initialSizeMB=(initialSize) / 1048576"
 set /A "compressedSizeMB=(compressedSize) / 1048576"
 set /A "initialSizeKB=(initialSize + 512 ) / 1024"

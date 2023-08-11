@@ -71,6 +71,7 @@ if "%lang%"=="2" (
     set "msg_26=Шлях до каталогу з файлами PDF:"
     set "msg_27=Три невдалих спроби обрати каталог з файлами PDF. Вихід."
     set "msg_28=Стиснення не відбулося через помилку  :"
+    set "msg_29=несуттєвий"
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -108,6 +109,7 @@ if "%lang%"=="2" (
     set "msg_26=Path to the folder with PDF files:"
     set "msg_27=Three failed attempts to select the folder with the PDF files. Exit."
     set "msg_28=Compression failed due to error       :"
+    set "msg_29=insignificant"
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -305,17 +307,20 @@ for /R "%directory%" %%F in (*_compressed.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
-REM get the size in megabytes
+REM Get the size in megabytes
 set /A "initialSizeMB=initialSize/10485"
 set /A "compressedSizeMB=compressedSize/10485"
 
-REM round the value to the second decimal place
+REM Round the value to the second decimal place
 set /A "initialSizeMB=((initialSizeMB*10) + 5) / 1000"
 set /A "compressedSizeMB=((compressedSizeMB*10) + 5) / 1000"
 
-REM file size after compression and percentage compression
-set /A "sizeDifference=initialSizeMB-compressedSizeMB"
-set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
+REM Compression percentage calculation
+if %initialSizeMB% gtr 0 (
+    set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
+) else (
+    set "compressionRatio=%msg_29%"
+)
 
 REM Set the color to yellow
 cls
@@ -347,7 +352,7 @@ echo %msg_22%  %initialSizeMB%.%initialSize:~-2% MB & echo %msg_22%  %initialSiz
 echo. & echo. >> %outputFile%
 echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB & echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_24%  %compressionRatio%%% & echo %msg_24%  %compressionRatio%%% >> %outputFile%
+echo %msg_24%  %compressionRatio% %% & echo %msg_24%  %compressionRatio% %% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
 

@@ -303,23 +303,26 @@ echo. & echo. >> %outputFile%
 
 REM Get the total size of the compressed files
 set /A "compressedSize=0"
-for /R "%directory%" %%F in (*_compressed.pdf) do (
+for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
 REM Get the size in megabytes
-set /A "initialSizeMB=initialSize/10485"
-set /A "compressedSizeMB=compressedSize/10485"
+set /A "initialSizeMB=(initialSize) / 1048576"
+set /A "compressedSizeMB=(compressedSize) / 1048576"
+set /A "initialSizeKB=(initialSize + 512 ) / 1024"
+set /A "compressedSizeKB=(compressedSize + 512) / 1024"
 
-REM Round the value to the second decimal place
-set /A "initialSizeMB=((initialSizeMB*10) + 5) / 1000"
-set /A "compressedSizeMB=((compressedSizeMB*10) + 5) / 1000"
 
 REM Compression percentage calculation
 if %initialSizeMB% gtr 0 (
     set /A "compressionRatio=((initialSizeMB-compressedSizeMB)*100)/initialSizeMB"
 ) else (
-    set "compressionRatio=%msg_29%"
+      if %initialSizeKB% gtr 0 (
+      set /A "compressionRatio=((initialSizeKB-compressedSizeKB)*100)/initialSizeKB"
+  ) else (
+      set "compressionRatio=%msg_29%"
+  )
 )
 
 REM Set the color to yellow
@@ -348,9 +351,9 @@ echo %long_separator% & echo %long_separator% >> %outputFile%
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
-echo %msg_22%  %initialSizeMB%.%initialSize:~-2% MB & echo %msg_22%  %initialSizeMB%.%initialSize:~-2% MB >> %outputFile%
+echo %msg_22%  %initialSizeMB%.%initialSizeKB:~-2% MB & echo %msg_22%  %initialSizeMB%.%initialSizeKB:~-2% MB >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB & echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB >> %outputFile%
+echo %msg_23%  %compressedSizeMB%.%compressedSizeKB:~-2% MB & echo %msg_23%  %compressedSizeMB%.%compressedSizeKB:~-2% MB >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %msg_24%  %compressionRatio% %% & echo %msg_24%  %compressionRatio% %% >> %outputFile%
 echo. & echo. >> %outputFile%

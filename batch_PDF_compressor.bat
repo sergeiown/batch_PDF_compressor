@@ -53,23 +53,24 @@ if "%lang%"=="2" (
     set "msg_8=Висока якість (принтер)"
     set "msg_9=Надвисока якість (до друку)"
     set "msg_10=Виберіть рівень стиснення:"
-    set "msg_11=Пропуск файлу:"
-    set "msg_12=Стиснення не потрібне. Файл вже було стиснуто."
+    set "msg_11=Перевірка файлу:"
+    set "msg_12=↓ Стиснення не потрібне. Файл вже було стиснуто."
     set "msg_13=Загальний прогрес:"
     set "msg_14=Триває стиснення файлу:"
-    set "msg_15=Стиснення не вдалося. Розмір стисненого файлу менше 5 кілобайт. Оригінальний файл не буде видалено."
-    set "msg_16=Успішне стиснення. Видалення оригінального файлу."
-    set "msg_17=Стиснення не вдалося. Оригінальний файл не буде видалено."
+    set "msg_15=█ Стиснення не вдалося. Розмір стисненого файлу менше 5 кілобайт. Оригінальний файл не буде видалено."
+    set "msg_16=↑ Успішне стиснення. Видалення оригінального файлу."
+    set "msg_17=█ Стиснення не вдалося. Оригінальний файл не буде видалено."
     set "msg_18=Стиснення завершено. Всі файли було успішно стиснуто."
-    set "msg_19=Усього стиснуто файлів             :"
-    set "msg_20=Файли, стиснуті під час сеансу     :"
-    set "msg_21=Файли, які не потребують стиснення :"
-    set "msg_22=Початковий загальний розмір до     :"
-    set "msg_23=Стиснений загальний розмір після   :"
-    set "msg_24=Ступінь стиснення                  :"
+    set "msg_19=Всього файлів для стиснення           :"
+    set "msg_20=Файли, стиснуті під час сеансу        :"
+    set "msg_21=Файли, які не потребують стиснення    :"
+    set "msg_22=Початковий загальний розмір до        :"
+    set "msg_23=Стиснений загальний розмір після      :"
+    set "msg_24=Ступінь стиснення                     :"
     set "msg_25=Вказаний шлях не існує."
     set "msg_26=Шлях до каталогу з файлами PDF:"
     set "msg_27=Три невдалих спроби обрати каталог з файлами PDF. Вихід."
+    set "msg_28=Стиснення не відбулося через помилку  :"
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -89,23 +90,24 @@ if "%lang%"=="2" (
     set "msg_8=High quality (printer)"
     set "msg_9=Ultra quality (prepress)"
     set "msg_10=Select compression level:"
-    set "msg_11=Skipping file:"
-    set "msg_12=No compression is required. File has already been compressed."
+    set "msg_11=Checking the file:"
+    set "msg_12=↓ No compression is required. File has already been compressed."
     set "msg_13=Total progress:"
     set "msg_14=Compressing file is in progress:"
-    set "msg_15=Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted."
-    set "msg_16=Compression successful. Deleting original file."
-    set "msg_17=Compression failed. Original file will not be deleted."
+    set "msg_15=█ Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted."
+    set "msg_16=↑ Compression successful. Deleting original file."
+    set "msg_17=█ Compression failed. Original file will not be deleted."
     set "msg_18=Compression complete. All files have been compressed successfully."
-    set "msg_19=Total files compressed               :"
-    set "msg_20=Files compressed during the session  :"
-    set "msg_21=Files that don't require compression :"
-    set "msg_22=Initial total size before            :"
-    set "msg_23=Compressed total size after          :"
-    set "msg_24=Compression ratio                    :"
+    set "msg_19=Total files to be compressed          :"
+    set "msg_20=Files compressed during the session   :"
+    set "msg_21=Files that don't require compression  :"
+    set "msg_22=Initial total size before             :"
+    set "msg_23=Compressed total size after           :"
+    set "msg_24=Compression ratio                     :"
     set "msg_25=The provided path does not exist."
     set "msg_26=Path to the folder with PDF files:"
     set "msg_27=Three failed attempts to select the folder with the PDF files. Exit."
+    set "msg_28=Compression failed due to error       :"
     set "copyright=Copyright (c) 2023 Serhii I. Myshko."
     set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
     set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
@@ -230,6 +232,7 @@ REM Reset the progress counter
 set /A "progress=0"
 set /A "progress_compression=0"
 set /A "progress_already_compressed=0"
+set /A "progress_error=0"
 
 REM Recursive loop to process PDF files in all subdirectories
 for /R "%directory%" %%F in (*.pdf) do (
@@ -256,30 +259,40 @@ for /R "%directory%" %%F in (*.pdf) do (
     cls
     REM Increment the progress counter
     set /A "progress+=1"
-    set /A "progress_compression+=1"
+    
     REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
 
     REM Modified code to use Ghostscript with the selected compression level
-    gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!"
-  
-    REM Check if the compressed file was created successfully
-    if exist "!output!" (
+    gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile%
+
+    if %errorlevel% neq 0 (
+      REM Error
+      echo %msg_17% & echo %msg_17% >> %outputFile%
+      set /A "progress_error+=1"
+    ) else (
+      REM Check if the compressed file was created successfully
+      if exist "!output!" (
       REM Check the size of the compressed file
       for %%A in ("!output!") do set /A "compressedSize=%%~zA"
-
       REM Check if the compressed file size is less than 5 kilobytes
       if !compressedSize! LSS 5120 (
-        echo %msg_15% & echo %msg_15% >> %outputFile%
-        del "!output!"
+      echo %msg_15% & echo %msg_15% >> %outputFile%
+      set /A "progress_error+=1"
+      del "!output!"
       ) else (
+        REM Success
         echo %msg_16% & echo %msg_16% >> %outputFile%
+        set /A "progress_compression+=1"
         del "!input!"
+        )
+      ) else (
+        REM Error
+        echo %msg_17% & echo %msg_17% >> %outputFile%
+        set /A "progress_error+=1"
       )
-    ) else (
-      echo %msg_17% & echo %msg_17% >> %outputFile%
     )
   )
 )
@@ -317,22 +330,24 @@ echo %double_separator% & echo %double_separator% >> %outputFile%
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
-echo %msg_19% !progress! & echo %msg_19% !progress! >> %outputFile%
+echo %msg_19%  !progress! & echo %msg_19%  !progress! >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_20% !progress_compression! & echo %msg_20% !progress_compression! >> %outputFile%
+echo %msg_20%  !progress_compression! & echo %msg_20%  !progress_compression! >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_21% !progress_already_compressed! & echo %msg_21% !progress_already_compressed! >> %outputFile%
+echo %msg_21%  !progress_already_compressed! & echo %msg_21%  !progress_already_compressed! >> %outputFile%
+echo. & echo. >> %outputFile%
+echo %msg_28%  !progress_error! & echo %msg_28%  !progress_error! >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %long_separator% & echo %long_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
-echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB & echo %msg_22% %initialSizeMB%.%initialSize:~-2% MB >> %outputFile%
+echo %msg_22%  %initialSizeMB%.%initialSize:~-2% MB & echo %msg_22%  %initialSizeMB%.%initialSize:~-2% MB >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB & echo %msg_23% %compressedSizeMB%.%compressedSize:~-2% MB >> %outputFile%
+echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB & echo %msg_23%  %compressedSizeMB%.%compressedSize:~-2% MB >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %msg_24% %compressionRatio%%% & echo %msg_24% %compressionRatio%%% >> %outputFile%
+echo %msg_24%  %compressionRatio%%% & echo %msg_24%  %compressionRatio%%% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
 

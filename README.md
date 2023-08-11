@@ -16,7 +16,7 @@ This Windows batch processing script provides an efficient way to compress PDF f
 The script offers the following features:
 
 1. Language selection (English or Ukrainian).
-2. Selection the path to the directory with PDF files to be compressed using the windows.Forms.FolderBrowserDialog.
+2. Selection the path to the directory with PDF files to be compressed using the windows.Forms.FolderBrowserDialog. With path validation and allowance for 3 false addresses or bounces.
 3. Selection of compression level: low, medium, high, ultra.
 4. The script processes all PDF files within the specified directory and its subdirectories.
 5. Displays progress of file processing and compression.

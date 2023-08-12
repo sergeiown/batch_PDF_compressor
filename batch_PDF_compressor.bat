@@ -32,96 +32,24 @@ set "lang=%errorlevel%"
 if "%lang%"=="2" (
     chcp 65001 >nul
     echo Обрана мова: українська >> %outputFile%
+    set "file_name=messages_ukrainian.txt"
     echo.
     cls
 ) else (
     chcp 65001 >nul
     echo Selected language: English >> %outputFile%
+    set "file_name=messages_english.txt"
     echo.
     cls
 )
 
-@REM Determining English and Ukrainian messages
-if "%lang%"=="2" (
-    set "msg_1=Ghostscript не встановлено."
-    set "msg_2=Будь ласка, завантажте та встановіть Ghostscript за наступним посиланням:"
-    set "msg_3=Поточна версія Ghostscript:"
-    set "msg_4=Гаразд, давайте почнемо."
-    set "msg_5=Оберіть каталог з файлами PDF:"
-    set "msg_6=Низька якість (екран)"
-    set "msg_7=Середня якість (електронна книга)"
-    set "msg_8=Висока якість (принтер)"
-    set "msg_9=Надвисока якість (до друку)"
-    set "msg_10=Виберіть рівень стиснення:"
-    set "msg_11=Перевірка файлу:"
-    set "msg_12=↓ Стиснення не потрібне. Файл вже було стиснуто."
-    set "msg_13=Загальний прогрес:"
-    set "msg_14=Триває стиснення файлу:"
-    set "msg_15=█ Стиснення не вдалося. Розмір стисненого файлу менше 5 кілобайт. Оригінальний файл не буде видалено."
-    set "msg_16=↑ Успішне стиснення. Видалення оригінального файлу."
-    set "msg_17=█ Стиснення не вдалося. Оригінальний файл не буде видалено."
-    set "msg_18=Стиснення завершено. Всі файли було успішно стиснуто."
-    set "msg_19=Всього файлів для стиснення           :"
-    set "msg_20=Файли, стиснуті під час сеансу        :"
-    set "msg_21=Файли, які не потребують стиснення    :"
-    set "msg_22=Початковий загальний розмір до        :"
-    set "msg_23=Стиснений загальний розмір після      :"
-    set "msg_24=Ступінь стиснення                     :"
-    set "msg_25=Вказаний шлях не існує."
-    set "msg_26=Шлях до каталогу з файлами PDF:"
-    set "msg_27=Три невдалих спроби обрати каталог з файлами PDF. Вихід."
-    set "msg_28=Стиснення не відбулося через помилку  :"
-    set "msg_29=несуттєвий"
-    set "copyright=Copyright (c) 2023 Serhii I. Myshko."
-    set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
-    set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
-    set "culture=uk-UA"
-    set "error_separator=-------------------------------------------------------------------------"
-    set "short_separator=---------------------------------------"
-    set "long_separator=-----------------------------------------------------"
-    set "double_separator======================================================"
-) else (
-    set "msg_1=Ghostscript is not installed."
-    set "msg_2=Please download and install Ghostscript from the following link:"
-    set "msg_3=Current Ghostscript version:"
-    set "msg_4=It's okay, let's get started."
-    set "msg_5=Select the folder with the PDF files:"
-    set "msg_6=Low quality (screen)"
-    set "msg_7=Medium quality (ebook)"
-    set "msg_8=High quality (printer)"
-    set "msg_9=Ultra quality (prepress)"
-    set "msg_10=Select compression level:"
-    set "msg_11=Checking the file:"
-    set "msg_12=↓ No compression is required. File has already been compressed."
-    set "msg_13=Total progress:"
-    set "msg_14=Compressing file is in progress:"
-    set "msg_15=█ Compression failed. Compressed file size is less than 5 kilobytes. Original file will not be deleted."
-    set "msg_16=↑ Compression successful. Deleting original file."
-    set "msg_17=█ Compression failed. Original file will not be deleted."
-    set "msg_18=Compression complete. All files have been compressed successfully."
-    set "msg_19=Total files to be compressed          :"
-    set "msg_20=Files compressed during the session   :"
-    set "msg_21=Files that don't require compression  :"
-    set "msg_22=Initial total size before             :"
-    set "msg_23=Compressed total size after           :"
-    set "msg_24=Compression ratio                     :"
-    set "msg_25=The provided path does not exist."
-    set "msg_26=Path to the folder with PDF files:"
-    set "msg_27=Three failed attempts to select the folder with the PDF files. Exit."
-    set "msg_28=Compression failed due to error       :"
-    set "msg_29=insignificant"
-    set "copyright=Copyright (c) 2023 Serhii I. Myshko."
-    set "copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md"
-    set "ghostscript_link=https://ghostscript.com/releases/gsdnld.html"
-    set "culture=en-US"
-    set "error_separator=----------------------------------------------------------------"
-    set "short_separator=-----------------------------------------------"
-    set "long_separator=------------------------------------------------------------------"
-    set "double_separator==================================================================="
-)
-
 @REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
+
+@REM Using external txt files with messages
+for /f "delims=" %%a in (%file_name%) do (
+    set "%%a"
+)
 
 @REM Check if Ghostscript is installed and show a notification if not
 where gswin64c.exe >nul 2>&1

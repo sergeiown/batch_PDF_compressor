@@ -1,4 +1,5 @@
-@REM MIT License Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels and options
+@REM This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels and options
+@REM MIT License Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 
 @echo off
 color 1F
@@ -195,26 +196,23 @@ if not exist "%directory%" (
     )
 )
 
+@REM Add compression level options
 echo.
 echo %short_separator%
 echo.
-
-@REM Add compression level options
 echo 1 - %msg_6%
 echo 2 - %msg_7%
 echo 3 - %msg_8%
 echo 4 - %msg_9%
 echo.
 
+@REM Add logic to choose the corresponding compression level
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
-
-@REM Add logic to choose the corresponding compression level
 if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo %msg_6% >> %outputFile%
 if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo %msg_7% >> %outputFile%
 if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo %msg_8% >> %outputFile%
 if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo %msg_9% >> %outputFile%
-
 timeout /t 2 >nul
 cls
 
@@ -267,7 +265,6 @@ for /R "%directory%" %%F in (*.pdf) do (
       echo %msg_17% & echo %msg_17% >> %outputFile%
       set /A "progress_error+=1"
     ) else (
-
       @REM Output file successfully created
       if exist "!output!" (
       @REM Check if the compressed file size is less than 5 kilobytes
@@ -290,7 +287,6 @@ for /R "%directory%" %%F in (*.pdf) do (
     )
   )
 )
-
 echo. & echo. >> %outputFile%
 
 @REM Get the total size of the files after compression in bytes
@@ -310,15 +306,14 @@ if %initialSizeKB% gtr 0 (
     set "compressionRatio=%msg_29%"
 )
 
+@REM Display and log a message block with information about the compression process
 cls
 color 1E
-
 echo %double_separator% & echo %double_separator% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %msg_18% & echo %msg_18% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
-
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
@@ -331,7 +326,6 @@ echo. & echo. >> %outputFile%
 echo %msg_28% !progress_error! & echo %msg_28% !progress_error! >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %long_separator% & echo %long_separator% >> %outputFile%
-
 timeout /t 1 >nul
 
 echo. & echo. >> %outputFile%
@@ -342,7 +336,6 @@ echo. & echo. >> %outputFile%
 echo %msg_23% %compressedSizeKB%.%compressedSizeKB:~-2% KB & echo %msg_23% %compressedSizeKB%.%compressedSizeKB:~-2% KB >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
-
 timeout /t 1 >nul
 
 @REM Get the current date and time
@@ -357,7 +350,7 @@ for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
     set "second=%%c"
 )
 
-@REM Log a message about the completion of the work with the date and time of completion
+@REM Log a message about the completion of the work with the date and time
 echo. >> %outputFile%
 echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%

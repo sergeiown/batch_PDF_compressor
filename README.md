@@ -26,7 +26,7 @@ The script offers the following features:
 ### Usage
 
 1. Install Ghostscript if not already installed.
-2. Use an executable file or run a script with a double click or via the command line.
+2. Use an executable file or run a script with a double click or via the command line. *If you are using bat script, make sure that the text files with the messages are available in the bat script directory.*
 3. Choose your desired language (1 - English, 2 - Ukrainian).
 4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
 5. Select the compression level (1-4) corresponding to the provided options.

@@ -6,7 +6,7 @@ color 1F
 @REM Determining the path to the log file
 set "outputFile=%USERPROFILE%\documents\log.txt"
 
-REM Get the current date and time
+@REM Get the current date and time
 for /f "tokens=1-4 delims= " %%a in ('date /t') do (
     set "month=%%a"
     set "day=%%b"
@@ -18,18 +18,17 @@ for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
     set "second=%%c"
 )
 
-REM Log the current date time and path to the log file before starting work
+@REM Log the current date time and path to the log file
 echo Start time: %year%%month%%day% %hour%:%minute%:%second% > %outputFile%
 echo. >> %outputFile%
 echo Log file path: %outputFile% >> %outputFile%
 echo. >> %outputFile%
 
-REM Language selection
+@REM Language selection with universal UTF-8 code page for Ukrainian and English
 choice /c 12 /n /m "Choose your language (1 - English, 2 - Ukrainian): "
 set "lang=%errorlevel%"
 
 if "%lang%"=="2" (
-    REM Set universal UTF-8 code page for Ukrainian and English
     chcp 65001 >nul
     echo Обрана мова: українська >> %outputFile%
     echo.
@@ -41,7 +40,7 @@ if "%lang%"=="2" (
     cls
 )
 
-REM Define English and Ukrainian messages
+@REM Determining English and Ukrainian messages
 if "%lang%"=="2" (
     set "msg_1=Ghostscript не встановлено."
     set "msg_2=Будь ласка, завантажте та встановіть Ghostscript за наступним посиланням:"
@@ -123,7 +122,7 @@ if "%lang%"=="2" (
 @REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion
 
-REM Check if Ghostscript is installed
+@REM Check if Ghostscript is installed and show a notification if not
 where gswin64c.exe >nul 2>&1
 if errorlevel 1 (
     cls
@@ -147,7 +146,7 @@ if errorlevel 1 (
     exit /b
 )
 
-REM Display current Ghostscript version
+@REM Display current Ghostscript version
 color 1A
 
 echo %short_separator%
@@ -159,12 +158,10 @@ echo %msg_4%
 echo.
 echo %short_separator%
 
-REM Pause for 2 seconds and prompt for path input
 timeout /t 2 >nul
-
 color 1F
 
-REM Selecting a directory using the FolderBrowserDialog
+@REM Select a directory using the FolderBrowserDialog
 set "maxAttempts=3"
 set "attempt=1"
 
@@ -179,7 +176,7 @@ set "directory=%folderSelection%"
 echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
 
-REM Check if the directory exists for three times
+@REM Check if the directory exists for three times
 if not exist "%directory%" (
     echo %msg_25% & echo %msg_25% >> %outputFile%
     if %attempt% lss %maxAttempts% (
@@ -202,7 +199,7 @@ echo.
 echo %short_separator%
 echo.
 
-REM Add compression level options
+@REM Add compression level options
 echo 1 - %msg_6%
 echo 2 - %msg_7%
 echo 3 - %msg_8%
@@ -212,7 +209,7 @@ echo.
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
 
-REM Add logic to choose the corresponding compression level
+@REM Add logic to choose the corresponding compression level
 if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo %msg_6% >> %outputFile%
 if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo %msg_7% >> %outputFile%
 if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo %msg_8% >> %outputFile%
@@ -221,7 +218,7 @@ if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo %msg_9% >> %outputF
 timeout /t 2 >nul
 cls
 
-REM Get the total count of PDF files in the directory and its subdirectories
+@REM Get the total count of PDF files in the directory and its subdirectories
 set /A "filecount=0"
 set /A "initialSize=0"
 for /R "%directory%" %%F in (*.pdf) do (
@@ -229,68 +226,64 @@ for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "initialSize+=%%~zA"
 )
 
-REM Reset the progress counter
+@REM Reset the progress counter
 set /A "progress=0"
 set /A "progress_compression=0"
 set /A "progress_already_compressed=0"
 set /A "progress_error=0"
 
-REM Recursive loop to process PDF files in all subdirectories
+@REM Process PDF files in all subdirectories and check if the file has already been compressed by checking the filename suffix
 for /R "%directory%" %%F in (*.pdf) do (
   set "input=%%F"
   set "output=%%~dpF%%~nF_compressed.pdf"
-  
-  REM Check if the file has already been compressed by checking the filename suffix
   echo. & echo. >> %outputFile%
   echo %%~nF | find /i "_compressed" >nul
   
   if not errorlevel 1 (
-    REM File has already been compressed, skip compression and deletion
+    @REM File has already been compressed, skip compression and deletion
     cls
-    REM Increment the progress counter
     set /A "progress+=1"
     set /A "progress_already_compressed+=1"
-    REM Calculate and display current progress percentage
+    @REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_11% %%F & echo %msg_11% %%F >> %outputFile%
     echo %msg_12% & echo %msg_12% >> %outputFile%
     ) else (
-    REM File needs to be compressed
-    cls
-    REM Increment the progress counter
-    set /A "progress+=1"
     
-    REM Calculate and display current progress percentage
+    @REM File needs to be compressed
+    cls
+    set /A "progress+=1"
+    @REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
 
-    REM Modified code to use Ghostscript with the selected compression level
+    @REM Use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile%
 
     if %errorlevel% neq 0 (
-      REM Error
+      @REM Error during comression
       echo %msg_17% & echo %msg_17% >> %outputFile%
       set /A "progress_error+=1"
     ) else (
-      REM Check if the compressed file was created successfully
+
+      @REM Output file successfully created
       if exist "!output!" (
-      REM Check the size of the compressed file
+      @REM Check if the compressed file size is less than 5 kilobytes
       for %%A in ("!output!") do set /A "compressedSize=%%~zA"
-      REM Check if the compressed file size is less than 5 kilobytes
       if !compressedSize! LSS 5120 (
       echo %msg_15% & echo %msg_15% >> %outputFile%
       set /A "progress_error+=1"
       del "!output!"
       ) else (
-        REM Success
+        @REM Successfull compression
         echo %msg_16% & echo %msg_16% >> %outputFile%
         set /A "progress_compression+=1"
         del "!input!"
         )
       ) else (
-        REM Error
+        @REM Output file has not been created
         echo %msg_17% & echo %msg_17% >> %outputFile%
         set /A "progress_error+=1"
       )
@@ -300,24 +293,23 @@ for /R "%directory%" %%F in (*.pdf) do (
 
 echo. & echo. >> %outputFile%
 
-REM Get the total size of the files after compression
+@REM Get the total size of the files after compression in bytes
 set /A "compressedSize=0"
 for /R "%directory%" %%F in (*.pdf) do (
   for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
 )
 
-REM Get the size in kilobytes
+@REM Get the size in kilobytes
 set /A "initialSizeKB=(initialSize + 512 ) / 1024"
 set /A "compressedSizeKB=(compressedSize + 512) / 1024"
 
-REM Compression percentage calculation
+@REM Compression percentage calculation
 if %initialSizeKB% gtr 0 (
     set /A "compressionRatio=((initialSizeKB-compressedSizeKB)*(-100))/initialSizeKB"
     ) else (
     set "compressionRatio=%msg_29%"
 )
 
-REM Set the color to yellow
 cls
 color 1E
 
@@ -353,7 +345,7 @@ echo %double_separator% & echo %double_separator% >> %outputFile%
 
 timeout /t 1 >nul
 
-REM Get the current date and time
+@REM Get the current date and time
 for /f "tokens=1-4 delims= " %%a in ('date /t') do (
     set "month=%%a"
     set "day=%%b"
@@ -365,7 +357,7 @@ for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
     set "second=%%c"
 )
 
-REM Log a message about the completion of the work along with the date and time of completion
+@REM Log a message about the completion of the work with the date and time of completion
 echo. >> %outputFile%
 echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%

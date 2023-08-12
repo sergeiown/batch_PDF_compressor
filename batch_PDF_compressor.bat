@@ -1,5 +1,5 @@
 @REM This script is a Windows batch process file written in the Batch command language. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) to compress PDF files using different compression levels and options
-@REM MIT License Copyright (c) 2023 Serhii I. Myshko. https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 
 @echo off
 color 1F
@@ -282,7 +282,7 @@ for /f "tokens=1-3 delims=:.," %%a in ("%time%") do (
 echo. >> %outputFile%
 echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
-echo %copyright% & echo %copyright% >> %outputFile%
+echo Copyright (c) 2023 Serhii I. Myshko
 echo %copyright_link% >> %outputFile%
 echo. & echo. >> %outputFile%
 pause

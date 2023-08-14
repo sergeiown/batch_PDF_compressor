@@ -185,7 +185,7 @@ for /R "%directory%" %%F in (*.pdf) do (
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
     @REM Use Ghostscript with the selected compression level
-    gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile%
+    gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile% 2>&1
 
     if %errorlevel% neq 0 (
       @REM Error during comression
@@ -228,7 +228,7 @@ for /R "%directory%" %%F in (*.pdf) do (
   set "filename=%%~nF"
   set "extension=%%~xF"
   set "compressedPair=!filename!_compressed!extension!"
-  
+
   if "!filename:~-10!"=="_compressed" (
     for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
   ) else (

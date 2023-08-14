@@ -28,6 +28,8 @@ echo. & echo. >> %outputFile%
 for /f "delims=" %%v in ('gswin64c.exe --version 2^>^&1') do set "ghostscript_version=%%v"
 echo %msg_3% %ghostscript_version% & echo %msg_3% %ghostscript_version% >> %outputFile%
 echo.
+echo %interface_lang%
+echo.
 echo %msg_4%
 echo.
 echo %short_separator%

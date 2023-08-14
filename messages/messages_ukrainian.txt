@@ -35,6 +35,7 @@ msg_34=↑ Успішне стиснення. Оригінальний файл 
 copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 ghostscript_link=https://ghostscript.com/releases/gsdnld.html
 culture=uk-UA
+interface_lang=Мова інтерфейсу: українська
 error_separator=-------------------------------------------------------------------------
 short_separator=---------------------------------------
 long_separator=-----------------------------------------------------

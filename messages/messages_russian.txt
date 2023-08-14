@@ -35,6 +35,7 @@ msg_34=↑ Успешное сжатие. Оригинальный файл со
 copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 ghostscript_link=https://ghostscript.com/releases/gsdnld.html
 culture=ru-RU
+interface_lang=Язык интерфейса: русский
 error_separator=-------------------------------------------------------------------------
 short_separator=---------------------------------------
 long_separator=-----------------------------------------------------

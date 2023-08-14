@@ -35,6 +35,7 @@ msg_34=↑ Compression successful. The original file is saved.
 copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 ghostscript_link=https://ghostscript.com/releases/gsdnld.html
 culture=en-US
+interface_lang=Interface language: English
 error_separator=----------------------------------------------------------------
 short_separator=-----------------------------------------------
 long_separator=------------------------------------------------------------------

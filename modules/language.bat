@@ -2,22 +2,22 @@
 
 @REM Automatic language selection according to the system language with the subsequent use of the universal UTF-8 code
 
-for /f "tokens=2 delims==" %%A in ('wmic os get oslanguage /value') do set "LANG=%%A"
-if "%LANG%"=="1058" (
+for /f %%A in ('wmic os get locale ^| find "0"') do set "LOCALE=%%A"
+if "%LOCALE%"=="0422" (
     chcp 65001 >nul
-    echo Обрана мова: українська >> %outputFile%
+    echo Мова інтерфейсу: українська >> %outputFile%
     set "file_name=messages/messages_ukrainian.txt"
     echo.
     cls
-) else if "%LANG%"=="1049" (
+) else if "%LOCALE%"=="0419" (
     chcp 65001 >nul
-    echo Выбранный язык: русский >> %outputFile%
+    echo Язык интерфейса: русский >> %outputFile%
     set "file_name=messages/messages_russian.txt"
     echo.
     cls
 ) else (
     chcp 65001 >nul
-    echo Selected language: English >> %outputFile%
+    echo Interface language: English >> %outputFile%
     set "file_name=messages/messages_english.txt"
     echo.
     cls

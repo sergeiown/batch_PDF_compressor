@@ -12,14 +12,14 @@ for /f "delims=" %%d in ('powershell -Command "$culture = [System.Globalization.
 set "directory=%folderSelection%"
 echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
-timeout /t 2 >nul
-cls
+timeout /t 1 >nul
 
 @REM Check if the directory exists for three times
 if not exist "%directory%" (
     echo %msg_25% & echo %msg_25% >> %outputFile%
     if %attempt% lss %maxAttempts% (
         set /a "attempt+=1"
+        cls
         goto input_path
     ) else (
         cls
@@ -31,6 +31,7 @@ if not exist "%directory%" (
         color
         start notepad "%outputFile%"
         set "exitScript=1"
+        timeout /t 1 >nul
         exit /b
     )
 )

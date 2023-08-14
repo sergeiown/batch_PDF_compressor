@@ -1,15 +1,18 @@
 @echo off
 
-@REM Automatic language selection according to the system language with the subsequent use of the universal UTF-8 code
+@REM Manual language selection with universal UTF-8 code page
+cls
+choice /c 123 /n /m "Choose your language (1 - English, 2 - Ukrainian, 3 - Russian): "
+set "lang=%errorlevel%"
 
-for /f "tokens=2 delims==" %%A in ('wmic os get oslanguage /value') do set "LANG=%%A"
-if "%LANG%"=="1058" (
+if "%lang%"=="2" (
     chcp 65001 >nul
     echo Обрана мова: українська >> %outputFile%
     set "file_name=messages/messages_ukrainian.txt"
     echo.
     cls
-) else if "%LANG%"=="1049" (
+)
+if "%lang%"=="3" (
     chcp 65001 >nul
     echo Выбранный язык: русский >> %outputFile%
     set "file_name=messages/messages_russian.txt"

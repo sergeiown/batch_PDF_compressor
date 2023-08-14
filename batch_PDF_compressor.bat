@@ -16,8 +16,11 @@ echo. >> %outputFile%
 echo Log file path: %outputFile% >> %outputFile%
 echo. >> %outputFile%
 
-@REM Select language
+@REM Automatic language selection
 call modules/language.bat
+
+@REM Test script with manual language selection
+@REM call tests/language_manual.bat
 
 @REM Enable delayed variable expansion. This allows obtaining updated variable values inside loops and code blocks
 setlocal enabledelayedexpansion

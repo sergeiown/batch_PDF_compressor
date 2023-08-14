@@ -11,8 +11,7 @@ if "%lang%"=="2" (
     set "file_name=messages/messages_ukrainian.txt"
     echo.
     cls
-)
-if "%lang%"=="3" (
+) else if "%lang%"=="3" (
     chcp 65001 >nul
     echo Выбранный язык: русский >> %outputFile%
     set "file_name=messages/messages_russian.txt"

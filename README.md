@@ -15,7 +15,7 @@ This Windows batch processing script provides an efficient way to compress PDF f
 
 The script offers the following features:
 
-1. English or Ukrainian language selection (added support for external message files).
+1. Automatic selection of English, Ukrainian, or Russian according to the system language using universal UTF-8 (support for external message files has been added).
 2. Selection the path to the directory with PDF files to be compressed using the windows.Forms.FolderBrowserDialog. With path validation and allowance for 3 false addresses or bounces.
 3. Selection of compression level: low, medium, high, ultra.
 4. Choose to delete or save original PDF files.
@@ -28,7 +28,7 @@ The script offers the following features:
 
 1. Install Ghostscript if not already installed.
 2. Use an executable file or run a script with a double click or via the command line. *If you are using bat script, make sure that the text files with the messages are available in the bat script directory.*
-3. Choose your desired language (1 - English, 2 - Ukrainian).
+3. The required language will be selected automatically according to the system settings
 4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
 5. Select the compression level (1-4) corresponding to the provided options.
 6. After completion, the log file will open, containing information about processed files and compression results.

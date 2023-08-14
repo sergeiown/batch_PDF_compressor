@@ -217,10 +217,21 @@ for /R "%directory%" %%F in (*.pdf) do (
 )
 echo. & echo. >> %outputFile%
 
-@REM Get the total size of the files after compression in bytes
+@REM Check if the last 10 characters of the file contain "_compressed". If so, then the size of this file will be included in the calculation, regardless of the existence of a file pair. If not, check if there is a file pair named "filename_compressed.extension". If there is no file pair, the size of this file is also taken into account in the calculation.
 set /A "compressedSize=0"
+
 for /R "%directory%" %%F in (*.pdf) do (
-  for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
+  set "filename=%%~nF"
+  set "extension=%%~xF"
+  set "compressedPair=!filename!_compressed!extension!"
+  
+  if "!filename:~-10!"=="_compressed" (
+    for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
+  ) else (
+    if not exist "!directory!\!compressedPair!" (
+      for %%A in ("%%F") do set /A "compressedSize+=%%~zA"
+    )
+  )
 )
 
 @REM Get the size in kilobytes

@@ -18,10 +18,11 @@ The script offers the following features:
 1. English or Ukrainian language selection (added support for external message files).
 2. Selection the path to the directory with PDF files to be compressed using the windows.Forms.FolderBrowserDialog. With path validation and allowance for 3 false addresses or bounces.
 3. Selection of compression level: low, medium, high, ultra.
-4. The script processes all PDF files within the specified directory and its subdirectories.
-5. Displays progress of file processing and compression.
-6. Upon completion, provides an overview of script execution, including the number of processed files, sizes before and after compression, and the compression ratio.
-7. Additionally, the script checks the system for the presence of Ghostscript before execution and maintains a detailed log file for each compression operation.
+4. Choose to delete or save original PDF files.
+5. The script processes all PDF files within the specified directory and its subdirectories.
+6. Displays progress of file processing and compression.
+7. Upon completion, provides an overview of script execution, including the number of processed files, sizes before and after compression, and the compression ratio.
+8. Additionally, the script checks the system for the presence of Ghostscript before execution and maintains a detailed log file for each compression operation.
 
 ### Usage
 

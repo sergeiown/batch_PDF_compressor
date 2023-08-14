@@ -56,7 +56,6 @@ where gswin64c.exe >nul 2>&1
 if errorlevel 1 (
     cls
     color 1C
-
     echo %error_separator% & echo %error_separator% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %msg_1% & echo %msg_1% >> %outputFile%
@@ -64,20 +63,16 @@ if errorlevel 1 (
     echo %ghostscript_link% & echo %ghostscript_link% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %error_separator% & echo %error_separator% >> %outputFile%
-
     timeout /t 2 >nul
-
     echo.
     pause
     color
-
     start notepad "%outputFile%"
     exit /b
 )
 
 @REM Display current Ghostscript version
 color 1A
-
 echo %short_separator%
 echo. & echo. >> %outputFile%
 for /f "delims=" %%v in ('gswin64c.exe --version 2^>^&1') do set "ghostscript_version=%%v"
@@ -86,21 +81,18 @@ echo.
 echo %msg_4%
 echo.
 echo %short_separator%
-
 timeout /t 2 >nul
 color 1F
 
 @REM Select a directory using the FolderBrowserDialog
 set "maxAttempts=3"
 set "attempt=1"
-
 :input_path
 echo. & echo. >> %outputFile%
 echo %msg_5%
 echo.
 set "folderSelection="
 for /f "delims=" %%d in ('powershell -Command "$culture = [System.Globalization.CultureInfo]::CreateSpecificCulture('%culture%'); Add-Type -AssemblyName System.Windows.Forms; $f = New-Object Windows.Forms.FolderBrowserDialog; $f.Description = '%msg_5%'; $f.Language = $culture; $f.ShowDialog(); $f.SelectedPath"') do set "folderSelection=%%d"
-
 set "directory=%folderSelection%"
 echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
@@ -177,6 +169,7 @@ for /R "%directory%" %%F in (*.pdf) do (
     cls
     set /A "progress+=1"
     set /A "progress_already_compressed+=1"
+
     @REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
@@ -191,7 +184,6 @@ for /R "%directory%" %%F in (*.pdf) do (
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
-
     @REM Use Ghostscript with the selected compression level
     gswin64c.exe -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile%
 

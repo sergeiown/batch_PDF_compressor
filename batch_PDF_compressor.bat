@@ -169,8 +169,6 @@ for /R "%directory%" %%F in (*.pdf) do (
     cls
     set /A "progress+=1"
     set /A "progress_already_compressed+=1"
-
-    @REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_11% %%F & echo %msg_11% %%F >> %outputFile%
@@ -180,7 +178,6 @@ for /R "%directory%" %%F in (*.pdf) do (
     @REM File needs to be compressed
     cls
     set /A "progress+=1"
-    @REM Calculate and display current progress percentage
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%

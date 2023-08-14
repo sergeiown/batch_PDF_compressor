@@ -141,6 +141,13 @@ if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo %msg_6% >> %outputFil
 if "%compresslevel%"=="2" set "pdfsettings=/ebook" & echo %msg_7% >> %outputFile%
 if "%compresslevel%"=="3" set "pdfsettings=/printer" & echo %msg_8% >> %outputFile%
 if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo %msg_9% >> %outputFile%
+echo. & echo. >> %outputFile%
+
+@REM Add logic to choose whether to delete originals or not
+choice /c 12 /n /m "%msg_30%"
+set "delete_originals=%errorlevel%"
+if "%delete_originals%"=="1" echo %msg_31% >> %outputFile%
+if "%delete_originals%"=="2" echo %msg_32% >> %outputFile%
 timeout /t 2 >nul
 cls
 
@@ -202,10 +209,15 @@ for /R "%directory%" %%F in (*.pdf) do (
       set /A "progress_error+=1"
       del "!output!"
       ) else (
-        @REM Successfull compression
-        echo %msg_16% & echo %msg_16% >> %outputFile%
-        set /A "progress_compression+=1"
-        del "!input!"
+          @REM Successfull compression
+          if "%delete_originals%"=="1" (
+          echo %msg_16% & echo %msg_16% >> %outputFile%
+          set /A "progress_compression+=1"
+          del "!input!"
+          ) else (
+            echo %msg_33% & echo %msg_33% >> %outputFile%
+            set /A "progress_compression+=1"
+          )
         )
       ) else (
         @REM Output file has not been created

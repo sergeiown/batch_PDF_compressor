@@ -4,7 +4,7 @@ This Windows batch processing script provides an efficient way to compress PDF f
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/4023a1b7-5b51-4f55-91a6-7b34245f0af4)
 
-### Requirements
+## Requirements
 
 1. Installed [Ghostscript](https://www.ghostscript.com/).
 2. Windows operating system.

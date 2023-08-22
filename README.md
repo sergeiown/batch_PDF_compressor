@@ -1,4 +1,4 @@
-## [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases/tag/Final)
+# [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases/tag/Final)
 
 This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) for performing the compression.
 
@@ -29,7 +29,7 @@ The script offers the following features:
 ### Usage
 
 1. Install Ghostscript if not already installed.
-2. **[Use an executable file](https://github.com/sergeiown/batch_PDF_compressor/releases)** *(best practice)* or run a script with a double click or via the command line *(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)*.
+2. **[Use an executable file](https://github.com/sergeiown/batch_PDF_compressor/releases)** _(best practice)_ or run a script with a double click or via the command line _(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)_.
 3. The required language will be selected automatically according to the system settings.
 4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
 5. Select the compression level (1-4) corresponding to the provided options.

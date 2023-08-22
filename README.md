@@ -1,4 +1,4 @@
-## Batch PDF compressor
+## [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases/tag/Final)
 
 This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) for performing the compression.
 

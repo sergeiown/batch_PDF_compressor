@@ -48,7 +48,7 @@ for /R "%directory%" %%F in (*.pdf) do (
     ) else (
       @REM Output file successfully created
       if exist "!output!" (
-      @REM Check if the compressed file size is less than 5 kilobytes
+      @REM Check if the size of the compressed file does not exceed 5 kilobytes, so can track a password-protected file that cannot be compressed and this is not a typical error, but only a special case
       for %%A in ("!output!") do set /A "compressedSize=%%~zA"
       if !compressedSize! LSS 5120 (
       echo %msg_15% & echo %msg_15% >> %outputFile%

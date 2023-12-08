@@ -11,7 +11,7 @@ This Windows batch processing script provides an efficient way to compress PDF f
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)
 
-* - *Tested on windows 10 and windows 11 x64 systems. The scripts have not been tested on earlier versions.*
+\* \- *Tested on windows 10 and windows 11 x64 systems. The scripts have not been tested on earlier versions.*
 
 ### Script Functionality
 

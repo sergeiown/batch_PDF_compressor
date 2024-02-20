@@ -7,9 +7,11 @@ This Windows batch processing script provides an efficient way to compress PDF f
 ## Requirements
 
 1. Installed [Ghostscript](https://www.ghostscript.com/).
-2. Windows operating system.
+2. Windows operating system.*
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)
+
+\* \- *Tested on windows 10 and windows 11 x64 systems. The scripts have not been tested on earlier versions.*
 
 ### Script Functionality
 

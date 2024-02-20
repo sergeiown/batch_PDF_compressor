@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2023 Serhii I. Myshko
+Copyright (c) 2023 - 2024 Serhii I. Myshko
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

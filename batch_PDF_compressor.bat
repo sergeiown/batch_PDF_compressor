@@ -5,7 +5,7 @@
 color 1F
 
 @REM Determining the path to the log file
-set "outputFile=%USERPROFILE%\documents\log.txt"
+set "outputFile=%USERPROFILE%\documents\batch_PDF_compressor_log.txt"
 
 @REM Get the current date and time
 call modules/date_time.bat

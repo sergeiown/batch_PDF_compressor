@@ -53,5 +53,3 @@ echo Copyright (c) 2023 Serhii I. Myshko
 echo %copyright_link% >> %outputFile%
 echo. & echo. >> %outputFile%
 pause
-color
-start notepad "%outputFile%"

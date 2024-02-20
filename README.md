@@ -31,12 +31,12 @@ The script offers the following features:
 ### Usage
 
 1. Install Ghostscript if not already installed.
-2. **[Use an executable file](https://github.com/sergeiown/batch_PDF_compressor/releases)** _(best practice)_ or run a script with a double click or via the command line _(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)_.
+2. **[Use an executable file](https://github.com/sergeiown/batch_PDF_compressor/releases)** *(best practice)* or run a script with a double click or via the command line *(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)*.
 3. The required language will be selected automatically according to the system settings.
 4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
 5. Select the compression level (1-4) corresponding to the provided options.
 6. Choose whether to delete or keep the original PDF files.
-7. After completion, the log file will open, containing information about processed files and compression results.
+7. After completion you can find the a log file containing information about processed files and compression results at `%UserProfile%\Documents` with the name `batch_PDF_compressor_log.txt`.
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/8c874426-ffab-4d7e-8749-0e70e52fbdb2)
 

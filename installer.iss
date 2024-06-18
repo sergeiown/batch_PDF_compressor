@@ -1,0 +1,58 @@
+#define MyAppName "Batch PDF Compressor"
+#define MyAppVersion "1.0"
+#define MyAppPublisher "Serhii I. Myshko"
+#define MyAppURL "https://github.com/sergeiown/batch_PDF_compressor"
+#define MyAppExeName "batch_PDF_compressor.exe"
+
+[Setup]
+AppId={{E714ADFC-E269-465D-9ED7-B54959018F8E}
+AppName={#MyAppName}
+AppVersion={#MyAppVersion}
+AppPublisher={#MyAppPublisher}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}
+AppUpdatesURL={#MyAppURL}
+DefaultDirName={userdocs}\batch_PDF_compressor
+DefaultGroupName=Batch PDF compressor
+AllowNoIcons=yes
+LicenseFile=LICENSE.md
+InfoAfterFile=infoafter.txt
+OutputBaseFilename=batch_PDF_compressor_install
+SetupIconFile=batch_PDF_compressor.ico
+Compression=lzma
+SolidCompression=yes
+WizardStyle=classic
+PrivilegesRequired=lowest
+
+[Languages]
+Name: "english"; MessagesFile: "compiler:Default.isl"
+Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
+
+[Tasks]
+Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+
+[Files]
+Source: "batch_PDF_compressor.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "batch_PDF_compressor.ico"; DestDir: "{app}"; Flags: ignoreversion
+
+[Icons]
+Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"
+Name: "{group}\{cm:ProgramOnTheWeb,{#MyAppName}}"; Filename: "{#MyAppURL}"
+Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+
+Name: "{userstartmenu}\Batch PDF compressor\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"
+Name: "{userstartmenu}\Batch PDF compressor\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
+
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"; Tasks: desktopicon
+
+[Run]
+Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
+[Uninstall]
+DisplayName={#MyAppName}
+AppId={{E714ADFC-E269-465D-9ED7-B54959018F8E}
+AppName={#MyAppName}
+AppVersion={#MyAppVersion}
+UninstallDisplayIcon={app}\batch_PDF_compressor.ico
+UninstallString="{app}\{#MyAppExeName}" /uninstall

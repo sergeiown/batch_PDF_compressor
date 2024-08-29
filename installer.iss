@@ -1,8 +1,8 @@
 #define MyAppName "Batch PDF Compressor"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "Serhii I. Myshko"
 #define MyAppURL "https://github.com/sergeiown/batch_PDF_compressor"
-#define MyAppExeName "batch_PDF_compressor.exe"
+#define MyAppExeName "batch_PDF_compressor.bat"
 
 [Setup]
 AppId={{E714ADFC-E269-465D-9ED7-B54959018F8E}
@@ -33,8 +33,18 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "batch_PDF_compressor.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "batch_PDF_compressor.bat"; DestDir: "{app}"; Flags: ignoreversion
 Source: "batch_PDF_compressor.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "modules\compression.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\date_time.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\directory.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\ghostscript.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\information.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\language.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\options.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "messages\messages_english.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
+Source: "messages\messages_russian.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
+Source: "messages\messages_ukrainian.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"

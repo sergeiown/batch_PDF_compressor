@@ -48,7 +48,7 @@ call modules/date_time.bat
 echo. >> %outputFile%
 echo Finish time: %day%.%month%.%year% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
-echo Copyright (c) 2023 Serhii I. Myshko
+echo Copyright (c) 2024 Serhii I. Myshko
 echo %copyright_link% >> %outputFile%
 echo. & echo. >> %outputFile%
 pause

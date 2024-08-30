@@ -11,7 +11,7 @@ set "outputFile=%USERPROFILE%\documents\batch_PDF_compressor_log.txt"
 call modules/date_time.bat
 
 @REM Log the current date time and path to the log file
-echo Start time: %year%%month%%day% %hour%:%minute%:%second% > %outputFile%
+echo Start time: %day%.%month%.%year% %hour%:%minute%:%second% > %outputFile%
 echo. >> %outputFile%
 echo Log file path: %outputFile% >> %outputFile%
 echo. >> %outputFile%
@@ -42,12 +42,11 @@ call modules/compression.bat
 @REM Display and log a message block with information about the compression process
 call modules/information.bat
 
-@REM Get the current date and time
 call modules/date_time.bat
 
 @REM Log a message about the completion of the work with the date and time
 echo. >> %outputFile%
-echo Finish time: %year%%month%%day% %hour%:%minute%:%second% >> %outputFile%
+echo Finish time: %day%.%month%.%year% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo Copyright (c) 2023 Serhii I. Myshko
 echo %copyright_link% >> %outputFile%

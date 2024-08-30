@@ -1,3 +1,5 @@
+@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+
 @echo off
 
 @REM Get the total count of PDF files in the directory and its subdirectories

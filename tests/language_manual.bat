@@ -1,3 +1,5 @@
+@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+
 @echo off
 
 @REM Manual language selection with universal UTF-8 code page

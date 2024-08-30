@@ -1,3 +1,5 @@
+@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+
 @echo off
 
 @REM Display and log a message block with information about the compression process

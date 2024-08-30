@@ -1,3 +1,5 @@
+@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+
 @echo off
 
 @REM Automatic language selection according to the system language with the subsequent use of the universal UTF-8 code

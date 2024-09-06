@@ -1,5 +1,5 @@
 msg_1=Ghostscript не встановлено.
-msg_2=Будь ласка, завантажте та встановіть Ghostscript за наступним посиланням:
+msg_2=Будь ласка, завантажте та встановіть Ghostscript за одним з посилань:
 msg_3=Поточна версія Ghostscript:
 msg_4=Все гаразд, давайте почнемо.
 msg_5=Оберіть каталог з файлами PDF:
@@ -34,6 +34,7 @@ msg_33=2 - Ні
 msg_34=↑ Успішне стиснення. Оригінальний файл збережено.
 copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 ghostscript_link=https://ghostscript.com/releases/gsdnld.html
+ghostscript_altlink=https://github.com/ArtifexSoftware/ghostpdl-downloads/releases
 culture=uk-UA
 interface_lang=Мова інтерфейсу: українська
 error_separator=-------------------------------------------------------------------------

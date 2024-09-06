@@ -1,5 +1,5 @@
 msg_1=Ghostscript is not installed.
-msg_2=Please download and install Ghostscript from the following link:
+msg_2=Download and install Ghostscript from any of the following links:
 msg_3=Current Ghostscript version:
 msg_4=It's okay, let's get started.
 msg_5=Select the folder with the PDF files:
@@ -34,6 +34,7 @@ msg_33=2 - No
 msg_34=↑ Compression successful. The original file is saved.
 copyright_link=https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 ghostscript_link=https://ghostscript.com/releases/gsdnld.html
+ghostscript_altlink=https://github.com/ArtifexSoftware/ghostpdl-downloads/releases
 culture=en-US
 interface_lang=Interface language: English
 error_separator=----------------------------------------------------------------

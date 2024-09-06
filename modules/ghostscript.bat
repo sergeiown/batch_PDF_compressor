@@ -10,8 +10,12 @@ if errorlevel 1 (
     echo %error_separator% & echo %error_separator% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %msg_1% & echo %msg_1% >> %outputFile%
+    echo. & echo. >> %outputFile%
     echo %msg_2% & echo %msg_2% >> %outputFile%
+    echo. & echo. >> %outputFile%
     echo %ghostscript_link% & echo %ghostscript_link% >> %outputFile%
+    echo. & echo. >> %outputFile%
+    echo %ghostscript_altlink% & echo %ghostscript_altlink% >> %outputFile%
     echo. & echo. >> %outputFile%
     echo %error_separator% & echo %error_separator% >> %outputFile%
     timeout /t 2 >nul

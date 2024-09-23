@@ -40,8 +40,10 @@ for /R "%directory%" %%F in (*.pdf) do (
     set /A "progress_percentage=(progress * 100 / filecount)"
     echo %msg_13% !progress_percentage!%% & echo %msg_13% !progress_percentage!%% >> %outputFile%
     echo %msg_14% %%F & echo %msg_14% %%F >> %outputFile%
+    
+
     @REM Use Ghostscript with the selected compression level
-    gswin64c.exe -sDEVICE=pdfwrite -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile% 2>&1
+    "%gsExecutable%" -sDEVICE=pdfwrite -dPDFSETTINGS=!pdfsettings! -dNOPAUSE -dQUIET -dBATCH -sOutputFile="!output!" "!input!" >> %outputFile% 2>&1
 
     if %errorlevel% neq 0 (
       @REM Error during comression

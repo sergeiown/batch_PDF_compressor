@@ -45,3 +45,6 @@ The script offers the following features:
 This script is distributed under the MIT License. For more details, refer to the [LICENSE.md](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md) file.
 
 ---
+<a href="https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions">
+    <img src="https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17" alt="windows_compatibility" style="width:20%;"/>
+</a>

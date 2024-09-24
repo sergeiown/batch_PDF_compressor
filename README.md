@@ -13,6 +13,10 @@ This Windows batch processing script provides an efficient way to compress PDF f
 
 \* \- *Tested on Windows 10 and Windows 11 operating systems, both x86 and x64 architectures. The scripts have not been tested on earlier versions.*
 
+<a href="https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions">
+    <img src="https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17" alt="windows_compatibility" style="width:20%;"/>
+</a>
+
 ### Script Functionality
 
 The script offers the following features:
@@ -43,8 +47,3 @@ The script offers the following features:
 ### License
 
 This script is distributed under the MIT License. For more details, refer to the [LICENSE.md](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md) file.
-
----
-<a href="https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions">
-    <img src="https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17" alt="windows_compatibility" style="width:20%;"/>
-</a>

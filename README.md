@@ -1,6 +1,7 @@
 # [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
-This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript](https://www.ghostscript.com/) for performing the compression.
+This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options.  
+It utilizes the [Ghostscript](https://www.ghostscript.com/) to perform operations on PDF files.
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/4023a1b7-5b51-4f55-91a6-7b34245f0af4)
 
@@ -13,7 +14,7 @@ This Windows batch processing script provides an efficient way to compress PDF f
 | \* \- *Tested on Windows 10 and Windows 11 operating systems, both x86 and x64 architectures. The scripts have not been tested on earlier versions.* |                       [![windows_compatibility](https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17)](https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions)                       |
 | :--- | :---: |
 
-| \* \- *The latest release will be detected and offered to install when you start Batch PDF Compressor.* |                       ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)                       |
+| \* \- *If [Ghostscript](https://www.ghostscript.com/) is not installed, the latest release will be detected and offered to install when Batch PDF Compressor is launched.* |                       ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)                       |
 | :--- | :---: |
 
 ### Script Functionality

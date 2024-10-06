@@ -1,21 +1,20 @@
 # [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
-This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript utility](https://www.ghostscript.com/) for performing the compression.
+This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript](https://www.ghostscript.com/) for performing the compression.
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/4023a1b7-5b51-4f55-91a6-7b34245f0af4)
 
 ## Requirements
 
-1. Installed [Ghostscript](https://www.ghostscript.com/).
-2. Windows operating system.*
+1. **Windows operating system.\***
+   
+2. **[Ghostscript](https://www.ghostscript.com/).\*\***
 
-![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)
+| \* \- *Tested on Windows 10 and Windows 11 operating systems, both x86 and x64 architectures. The scripts have not been tested on earlier versions.* |                       [![windows_compatibility](https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17)](https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions)                       |
+| :--- | :---: |
 
-\* \- *Tested on Windows 10 and Windows 11 operating systems, both x86 and x64 architectures. The scripts have not been tested on earlier versions.*
-
-<a href="https://en.wikipedia.org/wiki/List_of_Microsoft_Windows_versions">
-    <img src="https://github.com/user-attachments/assets/db2b5487-b5bf-45d9-8948-48bb88162f17" alt="windows_compatibility" style="width:20%;"/>
-</a>
+| \* \- *The latest release will be detected and offered to install when you start Batch PDF Compressor.* |                       ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/ed8ea024-9edf-43b4-829b-925daa2c9071)                       |
+| :--- | :---: |
 
 ### Script Functionality
 
@@ -34,13 +33,12 @@ The script offers the following features:
 
 ### Usage
 
-1. Install **[Ghostscript](https://www.ghostscript.com/releases/gsdnld.html)** if not already installed.
-2. **[Use the executable installer](https://github.com/sergeiown/batch_PDF_compressor/releases)** *(best practice)* or run a script with a double click or via the command line *(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)*.
-3. The required language will be selected automatically according to the system settings.
-4. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
-5. Select the compression level (1-4) corresponding to the provided options.
-6. Choose whether to delete or keep the original PDF files.
-7. After completion you can find the a log file containing information about processed files and compression results at `%UserProfile%\Documents` with the name `batch_PDF_compressor_log.txt`.
+1. **[Use the executable installer](https://github.com/sergeiown/batch_PDF_compressor/releases)** *(best practice)* or clone the project and run the `batch_PDF_compressor.bat` script *(If you are using a batch script, make sure that the text files with messages are available in the `/messages` directory and the modules are available in the `/modules` directory)*.
+2. The required language will be selected automatically according to the system settings.
+3. Select the directory containing the PDF files you want to compress. The script will "look" at the lower levels and process the PDFs in the subdirectories on its own.
+4. Select the compression level (1-4) corresponding to the provided options.
+5. Choose whether to delete or keep the original PDF files.
+6. After completion you can find the a log file containing information about processed files and compression results at `%UserProfile%\Documents` with the name `batch_PDF_compressor_log.txt`.
 
 ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/8c874426-ffab-4d7e-8749-0e70e52fbdb2)
 

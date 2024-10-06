@@ -6,7 +6,7 @@ set "gsRootPath64=%ProgramFiles%\gs"
 set "gsRootPath32=%ProgramFiles(x86)%\gs"
 set "gsExecutable="
 
-
+:check
 @REM check if Ghostscript exists in the Program Files directories
 for /d %%D in ("%gsRootPath64%\gs*") do (
     if exist "%%D\bin\gswin64c.exe" (
@@ -39,8 +39,24 @@ if errorlevel 0 (
     )
 )
 
-@REM If Ghostscript was not found show error message
 cls
+echo %long_separator% & echo %long_separator% >> %outputFile%
+echo. & echo. >> %outputFile%
+echo Ghostscript is not installed on your system. & echo Ghostscript is not installed on your system. >> %outputFile%
+echo. & echo. >> %outputFile%
+echo Perform the necessary steps to find an installer. & echo Perform the necessary steps to find an installer. >> %outputFile%
+echo. & echo. >> %outputFile%
+timeout /t 2 >nul
+
+call modules/installer.bat
+
+echo %long_separator% & echo %long_separator% >> %outputFile%
+
+if "%exitScript%"=="0" (
+    cls & goto check
+)
+
+cls & title = Batch PDF compressor
 color 1C
 echo %error_separator% & echo %error_separator% >> %outputFile%
 echo. & echo. >> %outputFile%
@@ -61,8 +77,8 @@ start notepad "%outputFile%"
 set "exitScript=1"
 exit /b
 
-@REM Display current Ghostscript version
 :found_gs
+title = Batch PDF compressor
 color 1A
 echo %short_separator%
 echo. & echo. >> %outputFile%

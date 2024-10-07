@@ -1,5 +1,5 @@
 #define MyAppName "Batch PDF Compressor"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "Serhii I. Myshko"
 #define MyAppURL "https://github.com/sergeiown/batch_PDF_compressor"
 #define MyAppExeName "batch_PDF_compressor.bat"
@@ -40,6 +40,7 @@ Source: "modules\date_time.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "modules\directory.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "modules\ghostscript.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "modules\information.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
+Source: "modules\installer.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "modules\language.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "modules\options.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "messages\messages_english.txt"; DestDir: "{app}\messages"; Flags: ignoreversion

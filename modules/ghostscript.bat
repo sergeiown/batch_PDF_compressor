@@ -5,6 +5,7 @@
 set "gsRootPath64=%ProgramFiles%\gs"
 set "gsRootPath32=%ProgramFiles(x86)%\gs"
 set "gsExecutable="
+set "attempt=1"
 
 :check
 @REM check if Ghostscript exists in the Program Files directories
@@ -40,42 +41,42 @@ if errorlevel 0 (
 )
 
 cls
-echo %long_separator% & echo %long_separator% >> %outputFile%
+echo %error_separator% & echo %error_separator% >> %outputFile%
 echo. & echo. >> %outputFile%
-echo Ghostscript is not installed on your system. & echo Ghostscript is not installed on your system. >> %outputFile%
-echo. & echo. >> %outputFile%
-echo Perform the necessary steps to find an installer. & echo Perform the necessary steps to find an installer. >> %outputFile%
-echo. & echo. >> %outputFile%
+echo %msg_35% & echo %msg_35% >> %outputFile%
+echo %msg_36% & echo %msg_36% >> %outputFile%
 timeout /t 2 >nul
 
 call modules/installer.bat
 
-echo %long_separator% & echo %long_separator% >> %outputFile%
+echo %msg_52% (%attempt%) & echo %msg_52% (%attempt%) >> %outputFile%
+echo %error_separator% & echo %error_separator% >> %outputFile%
 
-if "%exitScript%"=="0" (
+if "%exitScript%"=="0" if %attempt% lss 2 (
+    set /a attempt+=1
     cls & goto check
+) else (
+    cls & title = Batch PDF compressor
+    color 1C
+    echo %error_separator% & echo %error_separator% >> %outputFile%
+    echo. & echo. >> %outputFile%
+    echo %msg_1% & echo %msg_1% >> %outputFile%
+    echo.
+    echo %msg_2% & echo %msg_2% >> %outputFile%
+    echo.
+    echo %ghostscript_link% & echo %ghostscript_link% >> %outputFile%
+    echo.
+    echo %ghostscript_altlink% & echo %ghostscript_altlink% >> %outputFile%
+    echo.
+    echo %error_separator% & echo %error_separator% >> %outputFile%
+    timeout /t 2 >nul
+    echo.
+    pause
+    color
+    start notepad "%outputFile%"
+    set "exitScript=1"
+    exit /b
 )
-
-cls & title = Batch PDF compressor
-color 1C
-echo %error_separator% & echo %error_separator% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %msg_1% & echo %msg_1% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %msg_2% & echo %msg_2% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %ghostscript_link% & echo %ghostscript_link% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %ghostscript_altlink% & echo %ghostscript_altlink% >> %outputFile%
-echo. & echo. >> %outputFile%
-echo %error_separator% & echo %error_separator% >> %outputFile%
-timeout /t 2 >nul
-echo.
-pause
-color
-start notepad "%outputFile%"
-set "exitScript=1"
-exit /b
 
 :found_gs
 title = Batch PDF compressor

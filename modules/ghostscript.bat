@@ -79,7 +79,7 @@ if "%exitScript%"=="0" if %attempt% lss 2 (
 )
 
 :found_gs
-title = Batch PDF compressor
+title Batch PDF compressor
 color 1A
 echo %short_separator%
 echo. & echo. >> %outputFile%

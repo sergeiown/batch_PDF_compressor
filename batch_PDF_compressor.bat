@@ -2,7 +2,7 @@
 @REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
 
 @echo off
-title = Batch PDF compressor
+title Batch PDF compressor
 color 1F
 
 set "outputFile=%USERPROFILE%\documents\batch_PDF_compressor_log.txt"

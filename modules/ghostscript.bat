@@ -1,4 +1,4 @@
-@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+@REM [Copyright (c) 2023 - 2024 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
 
 @echo off
 
@@ -8,7 +8,6 @@ set "gsExecutable="
 set "attempt=1"
 
 :check
-@REM check if Ghostscript exists in the Program Files directories
 for /d %%D in ("%gsRootPath64%\gs*") do (
     if exist "%%D\bin\gswin64c.exe" (
         set "gsExecutable=%%D\bin\gswin64c.exe"
@@ -23,7 +22,6 @@ for /d %%D in ("%gsRootPath32%\gs*") do (
     )
 )
 
-@REM Check if Ghostscript is in PATH
 where gswin64c.exe >nul 2>&1
 if errorlevel 0 (
     for /f "delims=" %%I in ('where gswin64c.exe') do (

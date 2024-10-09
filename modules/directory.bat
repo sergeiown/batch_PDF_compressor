@@ -1,4 +1,4 @@
-@REM MIT License https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md
+@REM [Copyright (c) 2023 - 2024 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
 
 @echo off
 

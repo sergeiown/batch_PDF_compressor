@@ -5,6 +5,7 @@
 @echo off
 title Batch PDF compressor
 color 1F
+mode con: cols=105
 
 set "outputFile=%USERPROFILE%\documents\batch_PDF_compressor_log.txt"
 

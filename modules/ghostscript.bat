@@ -52,6 +52,7 @@ echo %error_separator% & echo %error_separator% >> %outputFile%
 
 if "%exitScript%"=="0" if %attempt% lss 2 (
     set /a attempt+=1
+    timeout /t 2 >nul
     cls & goto check
 ) else (
     cls & title = Batch PDF compressor

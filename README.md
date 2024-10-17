@@ -1,12 +1,31 @@
-# [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
-This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. 
+# [![batch_PDF_compressor](https://github.com/user-attachments/assets/a7ba8320-69a0-4dae-9dbf-20c98220777c)](https://github.com/sergeiown/batch_PDF_compressor/releases) [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
-It utilizes the [Ghostscript](https://www.ghostscript.com/) to perform operations on PDF files.  
+| This Windows batch processing script provides an efficient way to compress PDF files using different compression levels and options. It utilizes the [Ghostscript](https://www.ghostscript.com/) to perform operations on PDF files. The main purpose is to conveniently batch compress all PDF files in the selected directory as well as in all subdirectories. |                       ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/4023a1b7-5b51-4f55-91a6-7b34245f0af4)                       |
+| :--- | ---: |
 
-The main purpose is to conveniently batch compress all PDF files in the selected directory as well as in all subdirectories.
+## Structure
+```mermaid
+graph LR;
+    A[batch_PDF_compressor] --> B[modules]
+    A --> C[tests]
+    A --> D[messages]
+   
+    B --> B1[date_time]
+    B --> B2[language]
+    B --> B3[ghostscript]
+    B --> B4[directory]
+    B --> B5[options]
+    B --> B6[compression]
+    B --> B7[information]
+    B3 --> B8[installer]
 
-![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/4023a1b7-5b51-4f55-91a6-7b34245f0af4)
+    C --> C1[language_manual]
+
+    D --> D1[messages_english]
+    D --> D2[messages_ukrainian]
+    D --> D3[messages_russian]
+```
 
 ## Requirements
 
@@ -33,7 +52,9 @@ The script offers the following features:
 7. Upon completion, provides an overview of script execution, including the number of processed files, sizes before and after compression, and the compression ratio.
 8. Additionally, the script checks the system for the presence of Ghostscript before execution and maintains a detailed log file for each compression operation.
 
-![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/d01cc59a-68e3-40ae-acbd-68d9529d07ec)
+
+| ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/d01cc59a-68e3-40ae-acbd-68d9529d07ec) | ![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/8c874426-ffab-4d7e-8749-0e70e52fbdb2) |
+| :---: | :---: |
 
 ### Usage
 
@@ -44,8 +65,8 @@ The script offers the following features:
 5. Choose whether to delete or keep the original PDF files.
 6. After completion you can find the a log file containing information about processed files and compression results at `%UserProfile%\Documents` with the name `batch_PDF_compressor.log`.
 
-![image](https://github.com/sergeiown/batch_PDF_compressor/assets/112722061/8c874426-ffab-4d7e-8749-0e70e52fbdb2)
+
 
 ### License
 
-This script is distributed under the MIT License. For more details, refer to the [LICENSE.md](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md) file.
+[Copyright (c) 2023 - 2024 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)

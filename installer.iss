@@ -46,6 +46,7 @@ Source: "modules\options.bat"; DestDir: "{app}\modules"; Flags: ignoreversion
 Source: "messages\messages_english.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
 Source: "messages\messages_russian.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
 Source: "messages\messages_ukrainian.txt"; DestDir: "{app}\messages"; Flags: ignoreversion
+Source: "tests\language_manual.bat"; DestDir: "{app}\tests"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"

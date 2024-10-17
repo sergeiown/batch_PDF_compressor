@@ -2,8 +2,6 @@
 
 @echo off
 
-@REM Automatic language selection according to the system language with the subsequent use of the universal UTF-8 code
-
 for /f %%A in ('wmic os get locale ^| find "0"') do set "LOCALE=%%A"
 if "%LOCALE%"=="0422" (
     chcp 65001 >nul
@@ -25,5 +23,4 @@ if "%LOCALE%"=="0422" (
     cls
 )
 
-@REM Use external txt files with messages
 for /f "delims=" %%a in (%file_name%) do (set "%%a")

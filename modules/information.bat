@@ -2,7 +2,6 @@
 
 @echo off
 
-@REM Display and log a message block with information about the compression process
 cls
 color 1E
 echo %double_separator% & echo %double_separator% >> %outputFile%
@@ -12,7 +11,6 @@ echo. & echo. >> %outputFile%
 echo %double_separator% & echo %double_separator% >> %outputFile%
 timeout /t 1 >nul
 
-@REM Information about the number of files
 echo. & echo. >> %outputFile%
 echo %msg_19% !progress! & echo %msg_19% !progress! >> %outputFile%
 echo. & echo. >> %outputFile%
@@ -24,7 +22,6 @@ echo %msg_28% !progress_error! & echo %msg_28% !progress_error! >> %outputFile%
 echo. & echo. >> %outputFile%
 echo %long_separator% & echo %long_separator% >> %outputFile%
 
-@REM Information about the size and percentage of compression
 echo. & echo. >> %outputFile%
 echo %msg_22% %initialSizeKB%.%initialSizeKB:~-2% KB & echo %msg_22% %initialSizeKB%.%initialSizeKB:~-2% KB >> %outputFile%
 echo. & echo. >> %outputFile%

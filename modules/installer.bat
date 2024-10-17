@@ -31,7 +31,7 @@ if not exist "%jsonFile%" (
     exit /b
 )
 
-echo %msg_42% %jsonFile% & echo %msg_42% %jsonFile% >> %outputFile%
+echo %msg_42% & echo %msg_42% >> %outputFile%
 
 set "installerFound=0"
 if "%is64Bit%"=="1" (

@@ -1,5 +1,5 @@
 #define MyAppName "Batch PDF Compressor"
-#define MyAppVersion "1.4"
+#define MyAppVersion "1.5"
 #define MyAppPublisher "Serhii I. Myshko"
 #define MyAppURL "https://github.com/sergeiown/batch_PDF_compressor"
 #define MyAppExeName "batch_PDF_compressor.bat"
@@ -56,9 +56,6 @@ Name: "{userstartmenu}\Batch PDF compressor\{#MyAppName}"; Filename: "{app}\{#My
 Name: "{userstartmenu}\Batch PDF compressor\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\batch_PDF_compressor.ico"; Tasks: desktopicon
-
-[Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
 
 [Uninstall]
 DisplayName={#MyAppName}

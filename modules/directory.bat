@@ -2,7 +2,6 @@
 
 @echo off
 
-@REM Select a directory using the FolderBrowserDialog
 set "maxAttempts=3"
 set "attempt=1"
 :input_path
@@ -16,7 +15,6 @@ echo %directory% & echo %msg_26% %directory% >> %outputFile%
 echo. >> %outputFile%
 timeout /t 1 >nul
 
-@REM Check if the directory exists for three times
 if not exist "%directory%" (
     echo %msg_25% & echo %msg_25% >> %outputFile%
     if %attempt% lss %maxAttempts% (

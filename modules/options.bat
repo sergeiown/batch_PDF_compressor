@@ -2,7 +2,6 @@
 
 @echo off
 
-@REM Add compression level options
 echo.
 echo %short_separator%
 echo.
@@ -12,7 +11,6 @@ echo 3 - %msg_8%
 echo 4 - %msg_9%
 echo.
 
-@REM Add logic to choose the corresponding compression level
 choice /c 1234 /n /m "%msg_10%"
 set "compresslevel=%errorlevel%"
 if "%compresslevel%"=="1" set "pdfsettings=/screen" & echo %msg_6% >> %outputFile%
@@ -22,7 +20,6 @@ if "%compresslevel%"=="4" set "pdfsettings=/prepress" & echo %msg_9% >> %outputF
 echo. & echo. >> %outputFile%
 timeout /t 1 >nul
 
-@REM Add logic to choose whether to delete originals or not
 echo %short_separator%
 echo.
 echo %msg_31%

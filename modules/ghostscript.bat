@@ -2,12 +2,11 @@
 
 @echo off
 
+:check_again
 set "gsRootPath64=%ProgramFiles%\gs"
 set "gsRootPath32=%ProgramFiles(x86)%\gs"
 set "gsExecutable="
-set "attempt=1"
 
-:check
 for /d %%D in ("%gsRootPath64%\gs*") do (
     if exist "%%D\bin\gswin64c.exe" (
         set "gsExecutable=%%D\bin\gswin64c.exe"
@@ -47,13 +46,13 @@ timeout /t 2 >nul
 
 call modules/installer.bat
 
-echo %msg_52% (%attempt%) & echo %msg_52% (%attempt%) >> %outputFile%
+echo %msg_52% & echo %msg_52% >> %outputFile%
 echo %error_separator% & echo %error_separator% >> %outputFile%
 
-if "%exitScript%"=="0" if %attempt% lss 2 (
-    set /a attempt+=1
-    timeout /t 2 >nul
-    cls & goto check
+if "%exitScript%"=="0" (
+    timeout /t 5 >nul
+    cls
+    goto check_again
 ) else (
     cls & title = Batch PDF compressor
     color 1C

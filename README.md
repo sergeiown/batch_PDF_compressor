@@ -28,7 +28,7 @@ graph RL;
     A -->|call| B5[compression]
     A -->|call| B6[language]
     A -->|call| B7[information]
-    A -->|optional| Tests
+    A -->|optional_call| Tests
 
     subgraph Modules
         B1[date_time]
@@ -43,7 +43,6 @@ graph RL;
 
     subgraph Tests
         C1[language_manual]
-        style C1 fill:#ffcccc,stroke:#333,stroke-width:2px;
     end
 
     subgraph Messages

@@ -67,7 +67,7 @@ echo Finish time: %day%.%month%.%year% %hour%:%minute%:%second% >> %outputFile%
 echo. & echo. >> %outputFile%
 echo Log file: %outputFile%
 echo. & echo. >> %outputFile%
-echo Copyright (c) 2024 Serhii I. Myshko
+echo Copyright (c) 2025 Serhii I. Myshko
 echo %copyright_link% >> %outputFile%
 echo. & echo. >> %outputFile%
 

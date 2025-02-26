@@ -97,4 +97,4 @@ The script offers the following features:
 
 ### [License](#batch-pdf-compressor)
 
-[Copyright (c) 2023 - 2024 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
+[Copyright (c) 2023 - 2025 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)

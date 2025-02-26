@@ -2,7 +2,7 @@
 @REM Batch PDF Compressor
 @REM A Windows batch script for compressing PDF files using Ghostscript.
 @REM [Ghostscript](https://www.ghostscript.com/)
-@REM [Copyright (c) 2023 - 2024 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
+@REM [Copyright (c) 2023 - 2025 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
 @REM ========================================================================
 
 @echo off

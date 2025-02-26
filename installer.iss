@@ -1,5 +1,5 @@
 #define MyAppName "Batch PDF Compressor"
-#define MyAppVersion "1.6"
+#define MyAppVersion "1.7"
 #define MyAppPublisher "Serhii I. Myshko"
 #define MyAppURL "https://github.com/sergeiown/batch_PDF_compressor"
 #define MyAppExeName "batch_PDF_compressor.bat"

@@ -1,4 +1,8 @@
 ## [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
+
+[![Release](https://img.shields.io/github/v/release/sergeiown/compress_PDF)](https://github.com/sergeiown/compress_PDF/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/sergeiown/compress_PDF/total)](https://github.com/sergeiown/compress_PDF/releases)
+
 [![batch_PDF_compressor](https://github.com/user-attachments/assets/a7ba8320-69a0-4dae-9dbf-20c98220777c)](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
 - [Structure](#structure)

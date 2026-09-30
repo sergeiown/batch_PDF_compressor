@@ -1,7 +1,7 @@
 ## [Batch PDF compressor](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
-[![Release](https://img.shields.io/github/v/release/sergeiown/compress_PDF)](https://github.com/sergeiown/compress_PDF/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/sergeiown/compress_PDF/total)](https://github.com/sergeiown/compress_PDF/releases)
+[![Release](https://img.shields.io/github/v/release/sergeiown/batch_PDF_compressor)](https://github.com/sergeiown/batch_PDF_compressor/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/sergeiown/batch_PDF_compressor/total)](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
 [![batch_PDF_compressor](https://github.com/user-attachments/assets/a7ba8320-69a0-4dae-9dbf-20c98220777c)](https://github.com/sergeiown/batch_PDF_compressor/releases)
 
@@ -101,4 +101,4 @@ The script offers the following features:
 
 ### [License](#batch-pdf-compressor)
 
-[Copyright (c) 2023 - 2025 Serhii I. Myshko](https://github.com/sergeiown/compress_PDF/blob/main/LICENSE.md)
+[Copyright (c) 2023 - 2025 Serhii I. Myshko](https://github.com/sergeiown/batch_PDF_compressor/blob/main/LICENSE.md)
